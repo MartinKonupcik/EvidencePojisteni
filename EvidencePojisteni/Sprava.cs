@@ -17,6 +17,20 @@ namespace EvidencePojisteni
             
         }
 
+        public void VypisPojistene()
+        {
+            if (osoby.Count == 0)
+            {
+                Console.WriteLine("Zadny pojistenec neni evidovan.");
+                return;
+            }
+            Console.WriteLine("Seznam pojistenych osob:");
+            foreach (var pojistenec in osoby)
+            {
+                Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni}, Telefon: {pojistenec.Telefon}, Vek: {pojistenec.Vek}");
+            }
+        }
+
 
     }
 }
