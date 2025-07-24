@@ -1,6 +1,6 @@
 ﻿namespace EvidencePojisteni
 {
-    internal class PojisteneOsoby
+    public class PojisteneOsoby
     {
 
         public string Jmeno { get; set; }

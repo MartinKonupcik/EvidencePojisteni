@@ -8,6 +8,15 @@ namespace EvidencePojisteni
 {
     public class Sprava
     {
-        public PojisteneOsoby PojisteneOsoby { get; set; } = new PojisteneOsoby();
+        private List<PojisteneOsoby> osoby = new List<PojisteneOsoby>();
+  
+
+        public void PridatPojsitene(PojisteneOsoby pojistenec)
+        {
+            osoby.Add(pojistenec);
+            
+        }
+
+
     }
 }
