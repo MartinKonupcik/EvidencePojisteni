@@ -10,7 +10,6 @@ namespace EvidencePojisteni
         public string Prijmeni { get; set; }
         [Required(ErrorMessage = "Telefon je povinný")]
         public string Telefon { get; set; }
-        [Range(0, 120, ErrorMessage = "Věk musí být mezi 0 a 120 lety")]
         public int Vek { get; set; }
 
 
@@ -20,9 +19,6 @@ namespace EvidencePojisteni
             Prijmeni = prijmeni;
             Telefon = telefon;
             Vek = vek;
-        }
-   
-    
-    
+        }    
     }
 }

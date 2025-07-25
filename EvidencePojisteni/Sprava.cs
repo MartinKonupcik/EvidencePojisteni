@@ -11,7 +11,6 @@ namespace EvidencePojisteni
     {
         private List<PojisteneOsoby> osoby = new List<PojisteneOsoby>();
   
-
         public void PridatPojistence()
         {
             Console.WriteLine("Zadejte jméno pojisteneho:");
@@ -46,7 +45,7 @@ namespace EvidencePojisteni
             Console.WriteLine("Seznam pojistenych osob:");
             foreach (var pojistenec in osoby)
             {
-                Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni}, Telefon: {pojistenec.Telefon}, Vek: {pojistenec.Vek}");
+                Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni}  {pojistenec.Telefon}  {pojistenec.Vek}");
             }
         }
 
@@ -64,23 +63,14 @@ namespace EvidencePojisteni
             );
 
             if (nalezeny != null)
-            {
-                Console.WriteLine("---------------------------------");
+            {               
                 Console.WriteLine($"Nalezen:");
-                Console.WriteLine($"Jméno: {nalezeny.Jmeno}");
-                Console.WriteLine($"Příjmení: {nalezeny.Prijmeni}");
-                Console.WriteLine($"Telefon: {nalezeny.Telefon}");
-                Console.WriteLine($"Věk: {nalezeny.Vek}");
-                Console.WriteLine("---------------------------------");
+                Console.WriteLine($" {nalezeny.Jmeno} {nalezeny.Prijmeni} {nalezeny.Telefon} {nalezeny.Vek} ");             
             }
             else
             {
                 Console.WriteLine("Pojištěný nebyl nalezen.");
             }
-
-
         }
-
-
     }
 }
