@@ -9,7 +9,7 @@ namespace EvidencePojisteni
 {
     public class Sprava
     {
-        private List<PojisteneOsoby> osoby = new List<PojisteneOsoby>();
+        private List<PojistenaOsoba> osoby = new List<PojistenaOsoba>();
   
         public void PridatPojistence()
         {
@@ -29,7 +29,7 @@ namespace EvidencePojisteni
                 Console.WriteLine("Neplatný věk. Zadejte věk mezi 0 a 120:");
             }
 
-            var novyPojistenec = new PojisteneOsoby(jmeno, prijmeni, telefon, vek);
+            var novyPojistenec = new PojistenaOsoba(jmeno, prijmeni, telefon, vek);
             osoby.Add(novyPojistenec); 
 
             Console.WriteLine("Pojistenec byl úspěšně přidán.");
@@ -49,27 +49,53 @@ namespace EvidencePojisteni
             }
         }
 
-        public void VyhledatPojistene()
+        public void VyhledatPojistence()
         {
-            Console.WriteLine("Zadejte jméno:");
-            string jmeno = Console.ReadLine()?.Trim();
+            Console.WriteLine("Podle čeho chcete pojistence najit?");
+            Console.WriteLine("1- Jmeno");
+            Console.WriteLine("2- Prijmeni");   
+            var choice = Console.ReadKey().KeyChar;
+            Console.WriteLine();
 
-            Console.WriteLine("Zadejte příjmení:");
-            string prijmeni = Console.ReadLine()?.Trim();
-
-            var nalezeny = osoby.FirstOrDefault(o =>
-                o.Jmeno.Equals(jmeno, StringComparison.OrdinalIgnoreCase) &&
-                o.Prijmeni.Equals(prijmeni, StringComparison.OrdinalIgnoreCase)
-            );
-
-            if (nalezeny != null)
-            {               
-                Console.WriteLine($"Nalezen:");
-                Console.WriteLine($" {nalezeny.Jmeno} {nalezeny.Prijmeni} {nalezeny.Telefon} {nalezeny.Vek} ");             
-            }
-            else
+            switch (choice)
             {
-                Console.WriteLine("Pojištěný nebyl nalezen.");
+                case '1':
+                    Console.WriteLine("Zadejte jméno:");
+                    string hledaneJmeno = Console.ReadLine()?.Trim();
+                    var nalezeniPodleJmena = osoby.Where(o => o.Jmeno.Equals(hledaneJmeno, StringComparison.OrdinalIgnoreCase)).ToList();
+                    if (nalezeniPodleJmena.Count > 0)
+                    {
+                        Console.WriteLine("Nalezeni pojistenci:");
+                        foreach (var pojistenec in nalezeniPodleJmena)
+                        {
+                            Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Žádný pojištěný s tímto jménem nebyl nalezen.");
+                    }
+                    break;
+                case '2':
+                    Console.WriteLine("Zadejte příjmení:");
+                    string hledanePrijmeni = Console.ReadLine()?.Trim();
+                    var nalezeniPodlePrijmeni = osoby.Where(o => o.Prijmeni.Equals(hledanePrijmeni, StringComparison.OrdinalIgnoreCase)).ToList();
+                    if (nalezeniPodlePrijmeni.Count > 0)
+                    {
+                        Console.WriteLine("Nalezeni pojistenci:");
+                        foreach (var pojistenec in nalezeniPodlePrijmeni)
+                        {
+                            Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Žádný pojištěný s tímto příjmením nebyl nalezen.");
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Neplatná volba. Zkuste to znovu.");
+                    break;
             }
         }
     }
