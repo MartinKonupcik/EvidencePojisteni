@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EvidencePojisteni
+﻿namespace EvidencePojisteni
 {
     public class Sprava
     {
         private List<PojistenaOsoba> osoby = new List<PojistenaOsoba>();
-  
+
         public void PridatPojistence()
         {
             Console.WriteLine("Zadejte jméno pojisteneho:");
@@ -30,7 +23,7 @@ namespace EvidencePojisteni
             }
 
             var novyPojistenec = new PojistenaOsoba(jmeno, prijmeni, telefon, vek);
-            osoby.Add(novyPojistenec); 
+            osoby.Add(novyPojistenec);
 
             Console.WriteLine("Pojistenec byl úspěšně přidán.");
         }
@@ -49,15 +42,25 @@ namespace EvidencePojisteni
             }
         }
 
-        public void VyhledatPojistence()
+        public void VyhledatPojistenceJmenoiPrijmeni()
         {
-            Console.WriteLine("Podle čeho chcete pojistence najit?");
-            Console.WriteLine("1- Jmeno");
-            Console.WriteLine("2- Prijmeni");   
-            var choice = Console.ReadKey().KeyChar;
-            Console.WriteLine();
+            Console.WriteLine("Zadejte Jmeno");
+            string hledaneJmeno = Console.ReadLine()?.Trim();
+            Console.WriteLine("Zadejte Příjmení");
+            string hledanePrijmeni = Console.ReadLine()?.Trim();
+            var nalezeniPojistenci = osoby.Where(o => o.Jmeno.Equals(hledaneJmeno, StringComparison.OrdinalIgnoreCase) && o.Prijmeni.Equals(hledanePrijmeni, StringComparison.OrdinalIgnoreCase)).ToList();
+            foreach (var pojistenec in nalezeniPojistenci)
+            {
+                Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
+            }
 
-            switch (choice)
+        }
+        public void VyhledatPojistenceJmenoNeboPrijmeni()
+        {
+            Console.WriteLine("1- Jmeno");
+            Console.WriteLine("2- Příjmení");
+            var volba = Console.ReadKey().KeyChar;
+            switch (volba)
             {
                 case '1':
                     Console.WriteLine("Zadejte jméno:");
@@ -100,3 +103,4 @@ namespace EvidencePojisteni
         }
     }
 }
+            

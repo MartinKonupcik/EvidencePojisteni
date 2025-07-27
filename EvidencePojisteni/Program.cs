@@ -7,14 +7,15 @@ Console.WriteLine("Evidence Pojistenych");
 Console.WriteLine("---------------------------------");
 
 char choice = '0';
-while (choice != '4')
+while (choice != '5')
 {
     Console.WriteLine();
     Console.WriteLine("Vyberte si akci:");
     Console.WriteLine("1 - Přidat nového pojištěného");
     Console.WriteLine("2 - Vypsat všechny pojištěné");
-    Console.WriteLine("3 - Vyhledat pojištěného");
-    Console.WriteLine("4 - Konec");
+    Console.WriteLine("3 - Vyhledat pojištěného podle jmena i přijmeni");
+    Console.WriteLine("4- Vyhledat pojištěného podle jmena nebo přijmeni");
+    Console.WriteLine("5 - Konec");
 
     choice = Console.ReadKey().KeyChar;
     Console.WriteLine();
@@ -30,10 +31,13 @@ while (choice != '4')
             break;
 
         case '3':
-            sprava.VyhledatPojistene();
+            sprava.VyhledatPojistenceJmenoiPrijmeni();
             break;
 
-        case '4':
+            case '4':
+                sprava.VyhledatPojistenceJmenoNeboPrijmeni();
+            break;
+        case '5':
             Console.WriteLine("Děkuji za použití aplikace.");
             break;
 
