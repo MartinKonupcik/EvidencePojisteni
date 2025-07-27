@@ -21,27 +21,22 @@
             {
                 Console.WriteLine("Neplatný věk. Zadejte věk mezi 0 a 120:");
             }
-
             var novyPojistenec = new PojistenaOsoba(jmeno, prijmeni, telefon, vek);
             osoby.Add(novyPojistenec);
 
             Console.WriteLine("Pojistenec byl úspěšně přidán.");
         }
 
-        public void VypisPojistene()
-        {
+        public void VypisPojistencu()
+        { 
             if (osoby.Count == 0)
             {
-                Console.WriteLine("Zadny pojistenec neni evidovan.");
+              OperatorKonzole.PojistenciNenalezeni();
                 return;
             }
-            Console.WriteLine("Seznam pojistenych osob:");
-            foreach (var pojistenec in osoby)
-            {
-                Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni}  {pojistenec.Telefon}  {pojistenec.Vek}");
-            }
+            OperatorKonzole.VypisPojistenych(osoby);
         }
-
+       
         public void VyhledatPojistenceJmenoiPrijmeni()
         {
             Console.WriteLine("Zadejte Jmeno");
@@ -53,8 +48,8 @@
             {
                 Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
             }
-
         }
+
         public void VyhledatPojistenceJmenoNeboPrijmeni()
         {
             Console.WriteLine("1- Jmeno");
