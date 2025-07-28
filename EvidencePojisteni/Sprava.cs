@@ -44,10 +44,7 @@
             Console.WriteLine("Zadejte Příjmení");
             string hledanePrijmeni = Console.ReadLine()?.Trim();
             var nalezeniPojistenci = osoby.Where(o => o.Jmeno.Equals(hledaneJmeno, StringComparison.OrdinalIgnoreCase) && o.Prijmeni.Equals(hledanePrijmeni, StringComparison.OrdinalIgnoreCase)).ToList();
-            foreach (var pojistenec in nalezeniPojistenci)
-            {
-                Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
-            }
+            OperatorKonzole.VypisPojistenych(nalezeniPojistenci);
         }
 
         public void VyhledatPojistenceJmenoNeboPrijmeni()
@@ -63,16 +60,9 @@
                     var nalezeniPodleJmena = osoby.Where(o => o.Jmeno.Equals(hledaneJmeno, StringComparison.OrdinalIgnoreCase)).ToList();
                     if (nalezeniPodleJmena.Count > 0)
                     {
-                        Console.WriteLine("Nalezeni pojistenci:");
-                        foreach (var pojistenec in nalezeniPodleJmena)
-                        {
-                            Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
-                        }
+                        OperatorKonzole.VypisPojistenych(nalezeniPodleJmena);
                     }
-                    else
-                    {
-                        Console.WriteLine("Žádný pojištěný s tímto jménem nebyl nalezen.");
-                    }
+                    OperatorKonzole.PojistenciNenalezeni();
                     break;
                 case '2':
                     Console.WriteLine("Zadejte příjmení:");
@@ -80,16 +70,9 @@
                     var nalezeniPodlePrijmeni = osoby.Where(o => o.Prijmeni.Equals(hledanePrijmeni, StringComparison.OrdinalIgnoreCase)).ToList();
                     if (nalezeniPodlePrijmeni.Count > 0)
                     {
-                        Console.WriteLine("Nalezeni pojistenci:");
-                        foreach (var pojistenec in nalezeniPodlePrijmeni)
-                        {
-                            Console.WriteLine($"{pojistenec.Jmeno} {pojistenec.Prijmeni} {pojistenec.Telefon} {pojistenec.Vek}");
-                        }
+                        OperatorKonzole.VypisPojistenych(nalezeniPodlePrijmeni);
                     }
-                    else
-                    {
-                        Console.WriteLine("Žádný pojištěný s tímto příjmením nebyl nalezen.");
-                    }
+                    OperatorKonzole.PojistenciNenalezeni();
                     break;
                 default:
                     Console.WriteLine("Neplatná volba. Zkuste to znovu.");
