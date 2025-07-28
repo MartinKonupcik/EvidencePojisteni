@@ -27,7 +27,7 @@ while (choice != '5')
             break;
 
         case '2':
-            sprava.VypisPojistene();
+            sprava.VypisPojistencu();
             break;
 
         case '3':
