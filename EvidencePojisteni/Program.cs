@@ -1,43 +1,48 @@
 ﻿using EvidencePojisteni;
 
-List<PojisteneOsoby> seznamPojistencu = new List<PojisteneOsoby>();
+var sprava = new Sprava();
+
 Console.WriteLine("---------------------------------");
 Console.WriteLine("Evidence Pojistenych");
 Console.WriteLine("---------------------------------");
-Console.WriteLine();
-Console.WriteLine("Vyberte si akci:");
-var choice = '0';
+
+char choice = '0';
 while (choice != '5')
 {
     Console.WriteLine();
-    Console.WriteLine("1- Pridat noveho pojisteneho");
-    Console.WriteLine("2- Vypsat vsechny pojistene");
-    Console.WriteLine("3- Vyhledat pojisteneho");
-    Console.WriteLine("4- Konec");
-    
+    Console.WriteLine("Vyberte si akci:");
+    Console.WriteLine("1 - Přidat nového pojištěného");
+    Console.WriteLine("2 - Vypsat všechny pojištěné");
+    Console.WriteLine("3 - Vyhledat pojištěného podle jmena i přijmeni");
+    Console.WriteLine("4 - Vyhledat pojištěného podle jmena nebo přijmeni");
+    Console.WriteLine("5 - Konec");
+
     choice = Console.ReadKey().KeyChar;
     Console.WriteLine();
-    switch
-        (choice)
+
+    switch (choice)
     {
         case '1':
-          
+            sprava.PridatPojistence(); 
             break;
 
         case '2':
-           
+            sprava.VypisPojistencu();
             break;
 
         case '3':
-         
+            sprava.VyhledatPojistenceJmenoiPrijmeni();
             break;
 
-        case '4':
-            Console.WriteLine("Děkuji za použití aplikace");
+            case '4':
+                sprava.VyhledatPojistenceJmenoNeboPrijmeni();
+            break;
+        case '5':
+            Console.WriteLine("Děkuji za použití aplikace.");
             break;
 
         default:
-            Console.WriteLine("Invalid choice. Please try again.");
+            Console.WriteLine("Neplatná volba. Zkuste to znovu.");
             break;
     }
 }
