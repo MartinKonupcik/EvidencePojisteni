@@ -7,17 +7,17 @@
         public void PridatPojistence()
         {
             Console.WriteLine("Zadejte jméno pojisteneho:");
-            string jmeno = Console.ReadLine();
+            string jmeno = OperatorKonzole.NacteniNeprazdnehoStringu();
 
             Console.WriteLine("Zadejte příjmení pojisteneho:");
-            string prijmeni = Console.ReadLine();
+            string prijmeni = OperatorKonzole.NacteniNeprazdnehoStringu();
 
             Console.WriteLine("Zadejte telefon pojisteneho:");
-            string telefon = Console.ReadLine();
+            string telefon = OperatorKonzole.NacteniNeprazdnehoStringu();
 
             Console.WriteLine("Zadejte věk pojisteneho (0-120):");
             int vek;
-            while (!int.TryParse(Console.ReadLine(), out vek) || vek < 0 || vek > 120)
+            while (!int.TryParse(OperatorKonzole.NacteniNeprazdnehoStringu(), out vek) || vek < 0 || vek > 120)
             {
                 Console.WriteLine("Neplatný věk. Zadejte věk mezi 0 a 120:");
             }
@@ -28,23 +28,23 @@
         }
 
         public void VypisPojistencu()
-        { 
+        {
             if (osoby.Count == 0)
             {
-              OperatorKonzole.PojistenciNenalezeni();
+                OperatorKonzole.PojistenciNenalezeni();
                 return;
             }
             OperatorKonzole.VypisPojistenych(osoby);
         }
-       
+
         public void VyhledatPojistenceJmenoiPrijmeni()
         {
             Console.WriteLine("Zadejte Jmeno");
-            string hledaneJmeno = Console.ReadLine()?.Trim();
+            string hledaneJmeno = OperatorKonzole.NacteniNeprazdnehoStringu();
             Console.WriteLine("Zadejte Příjmení");
-            string hledanePrijmeni = Console.ReadLine()?.Trim();
+            string hledanePrijmeni = OperatorKonzole.NacteniNeprazdnehoStringu();
             var nalezeniPojistenci = osoby.Where(o => o.Jmeno.Equals(hledaneJmeno, StringComparison.OrdinalIgnoreCase) && o.Prijmeni.Equals(hledanePrijmeni, StringComparison.OrdinalIgnoreCase)).ToList();
-            OperatorKonzole.VypisPojistenych(nalezeniPojistenci);
+            ObsluhaVystupu(nalezeniPojistenci);
         }
 
         public void VyhledatPojistenceJmenoNeboPrijmeni()
@@ -55,30 +55,41 @@
             switch (volba)
             {
                 case '1':
+                    Console.WriteLine();
                     Console.WriteLine("Zadejte jméno:");
-                    string hledaneJmeno = Console.ReadLine()?.Trim();
-                    var nalezeniPodleJmena = osoby.Where(o => o.Jmeno.Equals(hledaneJmeno, StringComparison.OrdinalIgnoreCase)).ToList();
-                    if (nalezeniPodleJmena.Count > 0)
-                    {
-                        OperatorKonzole.VypisPojistenych(nalezeniPodleJmena);
-                    }
-                    OperatorKonzole.PojistenciNenalezeni();
+                    string hledaneJmeno = OperatorKonzole.NacteniNeprazdnehoStringu();
+                    var nalezeniPojistenci = osoby.Where(o => o.Jmeno == hledaneJmeno).ToList();
+                    ObsluhaVystupu(nalezeniPojistenci);
                     break;
                 case '2':
+                    Console.WriteLine();
                     Console.WriteLine("Zadejte příjmení:");
-                    string hledanePrijmeni = Console.ReadLine()?.Trim();
-                    var nalezeniPodlePrijmeni = osoby.Where(o => o.Prijmeni.Equals(hledanePrijmeni, StringComparison.OrdinalIgnoreCase)).ToList();
-                    if (nalezeniPodlePrijmeni.Count > 0)
-                    {
-                        OperatorKonzole.VypisPojistenych(nalezeniPodlePrijmeni);
-                    }
-                    OperatorKonzole.PojistenciNenalezeni();
+                    string hledanePrijmeni = OperatorKonzole.NacteniNeprazdnehoStringu();
+                    var nalezeniPojistenciPrijmeni = osoby.Where(o => o.Prijmeni == hledanePrijmeni).ToList();
+                    ObsluhaVystupu(nalezeniPojistenciPrijmeni);
                     break;
                 default:
                     Console.WriteLine("Neplatná volba. Zkuste to znovu.");
                     break;
             }
         }
+
+        public void ObsluhaVystupu(List<PojistenaOsoba> nalezeniPojistenci)
+        {
+
+            if (nalezeniPojistenci.Count > 1)
+            {
+                OperatorKonzole.VypisPojistenych(nalezeniPojistenci);
+            }
+            else if (nalezeniPojistenci.Count == 1)
+            {
+                OperatorKonzole.VypisPojistence(nalezeniPojistenci.Single());
+            }
+            else
+            {
+                OperatorKonzole.PojistenciNenalezeni();
+            }
+        }
     }
 }
-            
+

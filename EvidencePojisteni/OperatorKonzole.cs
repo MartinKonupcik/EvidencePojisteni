@@ -26,5 +26,16 @@
         {
             Console.WriteLine("Pojistenec nebyl nalezen.");
         }
+
+        public static string NacteniNeprazdnehoStringu()
+        {
+            string? text = Console.ReadLine();
+            while (string.IsNullOrWhiteSpace(text))
+            {
+                Console.WriteLine("Zadejte neprázný text!!!");
+                text = Console.ReadLine();
+            }
+            return text.Trim();
+        }
     }
 }

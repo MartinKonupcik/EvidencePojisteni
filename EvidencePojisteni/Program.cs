@@ -14,7 +14,7 @@ while (choice != '5')
     Console.WriteLine("1 - Přidat nového pojištěného");
     Console.WriteLine("2 - Vypsat všechny pojištěné");
     Console.WriteLine("3 - Vyhledat pojištěného podle jmena i přijmeni");
-    Console.WriteLine("4- Vyhledat pojištěného podle jmena nebo přijmeni");
+    Console.WriteLine("4 - Vyhledat pojištěného podle jmena nebo přijmeni");
     Console.WriteLine("5 - Konec");
 
     choice = Console.ReadKey().KeyChar;

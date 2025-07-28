@@ -6,9 +6,7 @@ namespace EvidencePojisteni
     {
         public int CisloPojistence { get; set; } = new Random().Next(1000, 9999);
 
-        [Required(ErrorMessage = "Jméno je povinné")]
         public string Jmeno { get; } = jmeno;
-        [Required(ErrorMessage = "Příjmení je povinné")]
         public string Prijmeni { get; } = prijmeni;
         public string Telefon { get; } = telefon;
         public int Vek { get; } = vek;
