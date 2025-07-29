@@ -102,20 +102,21 @@
                 OperatorKonzole.PojistenciNenalezeni();
             }
             Console.WriteLine("Zadejte typ pojištění:");
-            string typ = Console.ReadLine();
+            string typ = OperatorKonzole.NacteniNeprazdnehoStringu();
             Console.WriteLine("Zadejte předmět pojištění:");
-            string predmet = Console.ReadLine();
+            string predmet = OperatorKonzole.NacteniNeprazdnehoStringu();
             Console.WriteLine("Zadejte částku:");
-            decimal castka = decimal.Parse(Console.ReadLine());
+            decimal castka = decimal.Parse(OperatorKonzole.NacteniNeprazdnehoStringu());
             Console.WriteLine("Platnost od (yyyy-mm-dd):");
-            DateTime od = DateTime.Parse(Console.ReadLine());
+            DateTime od = DateTime.Parse(OperatorKonzole.NacteniNeprazdnehoStringu());
             Console.WriteLine("Platnost do (yyyy-mm-dd):");
-            DateTime doo = DateTime.Parse(Console.ReadLine());
+            DateTime doo = DateTime.Parse(OperatorKonzole.NacteniNeprazdnehoStringu());
 
             var pojisteni = new Pojisteni { Typ = typ, Predmet = predmet, Castka = castka, PlatnostOd = od, PlatnostDo = doo };
             osoba.Pojisteni.Add(pojisteni);
             Console.WriteLine("Pojištění přidáno.");
         }
+    
     }
 }
 
