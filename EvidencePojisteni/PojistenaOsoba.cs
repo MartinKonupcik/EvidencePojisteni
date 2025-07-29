@@ -1,15 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+
 
 namespace EvidencePojisteni
 {
-    public class PojistenaOsoba(string jmeno, string prijmeni, string telefon, int vek)
+    public class PojistenaOsoba
     {
-        public int CisloPojistence { get; set; } = new Random().Next(1000, 9999);
+        [Key]
+        public int CisloPojistence { get; set; }  
 
-        public string Jmeno { get; } = jmeno;
-        public string Prijmeni { get; } = prijmeni;
-        public string Telefon { get; } = telefon;
-        public int Vek { get; } = vek;
+        public string Jmeno { get; set; }
+        public string Prijmeni { get; set; }
+        public string Telefon { get; set; }
+        public int Vek { get; set; }
+
+        public List<Pojisteni> Pojisteni { get; set; } = new List<Pojisteni>();
+
+       
+        public PojistenaOsoba() { }
+
+        
+        public PojistenaOsoba(string jmeno, string prijmeni, string telefon, int vek)
+        {
+            Jmeno = jmeno;
+            Prijmeni = prijmeni;
+            Telefon = telefon;
+            Vek = vek;
+        }
 
         public override string ToString()
         {

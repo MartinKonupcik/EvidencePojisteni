@@ -21,6 +21,7 @@
             {
                 Console.WriteLine("Neplatný věk. Zadejte věk mezi 0 a 120:");
             }
+
             var novyPojistenec = new PojistenaOsoba(jmeno, prijmeni, telefon, vek);
             osoby.Add(novyPojistenec);
 
@@ -90,6 +91,32 @@
                 OperatorKonzole.PojistenciNenalezeni();
             }
         }
+        public void PridatPojisteni()
+        {
+            Console.WriteLine("Zadejte číslo pojištěného:");
+            int cislo;
+            int.TryParse(Console.ReadLine(), out cislo);
+            var osoba = osoby.FirstOrDefault(o => o.CisloPojistence == cislo);
+            if (osoba == null)
+            {
+                OperatorKonzole.PojistenciNenalezeni();
+            }
+            Console.WriteLine("Zadejte typ pojištění:");
+            string typ = Console.ReadLine();
+            Console.WriteLine("Zadejte předmět pojištění:");
+            string predmet = Console.ReadLine();
+            Console.WriteLine("Zadejte částku:");
+            decimal castka = decimal.Parse(Console.ReadLine());
+            Console.WriteLine("Platnost od (yyyy-mm-dd):");
+            DateTime od = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Platnost do (yyyy-mm-dd):");
+            DateTime doo = DateTime.Parse(Console.ReadLine());
+
+            var pojisteni = new Pojisteni { Typ = typ, Predmet = predmet, Castka = castka, PlatnostOd = od, PlatnostDo = doo };
+            osoba.Pojisteni.Add(pojisteni);
+            Console.WriteLine("Pojištění přidáno.");
+        }
     }
 }
+
 
