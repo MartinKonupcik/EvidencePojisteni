@@ -1,9 +1,68 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+   
 *@
 @{
-    <div class="text-center">
-        <h1 class="display-4">Pojisteni</h1>
-        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>
+    ViewData["Title"] = "Pojištěnci";
 }
+<div class="container">
+    <h1>Pojištěnci</h1>
+    <div class="">
+        <a class="btn btn-blue" asp-action="NovyPojistenec" asp-controller="Home">Nový pojištěnec</a>
+    </div>
+    <table class="">
+        <tr>
+            <th>Jméno</th>
+            <th>Bydliště</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <a asp-action="DetailPojistence" asp-route-id="">
+                    Jmeno Prijmeni
+                </a>
+            </td>
+            <td>Adresa</td>
+            <td>
+                <div class="">
+                    <button class="btn btn-red">Odstranit</button>
+                    <button class="btn btn-yellow">Editovat</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a asp-action="DetailPojistence" asp-route-id="">
+                    Jmeno Prijmeni
+                </a>
+            </td>
+            <td>Adresa</td>
+            <td>
+                <div class="">
+                    <button class="btn btn-red">Odstranit</button>
+                    <button class="btn btn-yellow">Editovat</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a asp-action="DetailPojistence" asp-route-id="">
+                    Jmeno Prijmeni
+                </a>
+            </td>
+            <td>Adresa</td>
+            <td>
+                <div class="">
+                    <button class="btn btn-red">Odstranit</button>
+                    <button class="btn btn-yellow">Editovat</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="pagination">
+        <button class="pagination-btn" disabled>Předchozí</button>
+        <button class="pagination-btn">1</button>
+        <button class="pagination-btn active">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">Další</button>
+    </div>
+</div>

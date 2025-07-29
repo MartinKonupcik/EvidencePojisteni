@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Nový pojištěnec";
+}
+
+<h2>Nový pojištěnec</h2>
+<form action="/Pojistenci/Create" method="post">
+    <div>
+        <label for="Jmeno">Jméno</label>
+        <input type="text" id="Jmeno" name="Jmeno" class="" placeholder="Jan" />
+    </div>
+    <div>
+        <label for="Prijmeni">Příjmení</label>
+        <input type="text" id="Prijmeni" name="Prijmeni" class="" placeholder="Novák" />
+    </div>
+    <div>
+        <label for="Email">Email</label>
+        <input type="email" id="Email" name="Email" class="" placeholder="jannovak88@seznam.cz" />
+    </div>
+    <div>
+        <label for="Telefon">Telefon</label>
+        <input type="text" id="Telefon" name="Telefon" class="" placeholder="731 584 972" />
+    </div>
+    <div>
+        <label for="Ulice">Ulice a číslo popisné</label>
+        <input type="text" id="Ulice" name="Ulice" class="" placeholder="Ve Svahu 3" />
+    </div>
+    <div>
+        <label for="Mesto">Město</label>
+        <input type="text" id="Mesto" name="Mesto" class="" placeholder="Praha 1" />
+    </div>
+    <div>
+        <label for="PSC">PSČ</label>
+        <input type="text" id="PSC" name="PSC" class="" placeholder="100 00" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Uložit</button>
+    </div>
+</form>

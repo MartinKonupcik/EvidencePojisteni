@@ -28,6 +28,24 @@ namespace EvidencePojisteni.Web.Controllers
             return View();
         }
 
+        public IActionResult DetailPojisteni()
+        {
+            return View();
+        }
+        public IActionResult PridatPojisteniPojistenci()
+        {
+            return View();
+        }
+
+        public IActionResult DetailPojistence()
+        {
+            return View();
+        }
+
+        public IActionResult NovyPojistenec()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

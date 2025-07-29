@@ -1,0 +1,49 @@
+﻿@*
+    
+*@
+@{
+    ViewData["Title"] = "Detail Pojištěnce";
+}
+<div class="profile-info">
+    <h2>Jmeno</h2>
+    <div class="profile-details">
+        <div class="col">
+            ulice<br>
+            Město<br>
+psč        </div>
+        <div class="col">
+            email<br>
+telefon        </div>
+    </div>
+</div>
+</div>
+
+<div class=>
+    <h3>Sjednaná pojištění</h3>
+    <table class=>
+        <tr>
+            <th>Pojištění</th>
+            <th>Částka</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <a asp-controller="Home" asp-action="DetailPojisteni" asp-route-id="">Pojištění majetku</a>
+            </td>
+            <td>10000000 Kč</td>
+            <td>
+                <div class="">
+                    <button class="btn btn-red">Odstranit</button>
+                    <button class="btn btn-yellow">Editovat</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="action-bar">
+        <button class="btn btn-blue">Přidat pojištění</button>
+        <button class="btn btn-yellow">Editovat pojištěnce</button>
+        <button class="btn btn-red">Odstranit pojištěnce</button>
+    </div>
+</div>
+</div>

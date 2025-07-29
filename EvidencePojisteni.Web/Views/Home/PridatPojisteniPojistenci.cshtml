@@ -1,0 +1,38 @@
+﻿@*
+    
+*@
+@{
+    ViewData["Title"] = "Přidat pojištění pojištěnci";
+}
+<h2>Přidat pojištění k Jmeno</h2>
+<form action="" method="post">
+    <div>
+        <label for="TypPojisteni">Pojištění</label>
+        <select id="TypPojisteni" name="TypPojisteni" class="">
+            <option value="majetek">Pojištění majetku</option>
+            <option value="vozidlo">Pojištění vozidla</option>
+            <option value="životní">Životní pojištění</option>
+        </select>
+    </div>
+            <label for="Castka">Částka</label>
+            <input type="number" id="Castka" name="Castka" class="" placeholder="10000000" />
+        </div>
+        <div>
+            <label for="PredmetPojisteni">Předmět pojištění</label>
+            <input type="text" id="PredmetPojisteni" name="PredmetPojisteni" class="" placeholder="Byt" />
+        </div>
+    </div>
+    <div>
+        <div>
+            <label for="PlatnostOd">Platnost od</label>
+            <input type="text" id="PlatnostOd" name="PlatnostOd" class="" placeholder="1.1.2025" />
+        </div>
+        <div>
+            <label for="PlatnostDo">Platnost do</label>
+            <input type="text" id="PlatnostDo" name="PlatnostDo" class="" placeholder="31.12.2025" />
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Uložit</button>
+    </div>
+</form>
