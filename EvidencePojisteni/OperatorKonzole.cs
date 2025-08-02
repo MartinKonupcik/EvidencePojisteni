@@ -1,41 +1,41 @@
-﻿namespace EvidencePojisteni
+﻿namespace EvidencePojisteni;
+
+public static class OperatorKonzole
 {
-    public static class OperatorKonzole
+    public static void VypisPojistence(PojistenaOsoba pojistenaOsoba)
     {
-        public static void VypisPojistence(PojistenaOsoba pojistenaOsoba)
+        Console.WriteLine(pojistenaOsoba.ToString());
+    }
+
+    public static void VypisPojistenych(List<PojistenaOsoba> pojisteneOsoby)
+    {
+        if (pojisteneOsoby.Count == 0)
         {
-            Console.WriteLine(pojistenaOsoba.ToString());
+            Console.WriteLine("Zadny pojistenec neni evidovan.");
+            return;
         }
 
-        public static void VypisPojistenych(List<PojistenaOsoba> pojisteneOsoby)
+        Console.WriteLine("Seznam pojistenych osob:");
+        foreach (var pojistenec in pojisteneOsoby)
         {
-            if (pojisteneOsoby.Count == 0)
-            {
-                Console.WriteLine("Zadny pojistenec neni evidovan.");
-                return;
-            }
+            VypisPojistence(pojistenec);
+        }
+    }
 
-            Console.WriteLine("Seznam pojistenych osob:");
-            foreach (var pojistenec in pojisteneOsoby)
-            {
-                VypisPojistence(pojistenec);
-            }
+    public static void PojistenciNenalezeni()
+    {
+        Console.WriteLine("Pojistenec nebyl nalezen.");
+    }
+
+    public static string NacteniNeprazdnehoStringu()
+    {
+        var text = Console.ReadLine();
+        while (string.IsNullOrWhiteSpace(text))
+        {
+            Console.WriteLine("Zadejte neprázný text!!!");
+            text = Console.ReadLine();
         }
 
-        public static void PojistenciNenalezeni()
-        {
-            Console.WriteLine("Pojistenec nebyl nalezen.");
-        }
-
-        public static string NacteniNeprazdnehoStringu()
-        {
-            string? text = Console.ReadLine();
-            while (string.IsNullOrWhiteSpace(text))
-            {
-                Console.WriteLine("Zadejte neprázný text!!!");
-                text = Console.ReadLine();
-            }
-            return text.Trim();
-        }
+        return text.Trim();
     }
 }

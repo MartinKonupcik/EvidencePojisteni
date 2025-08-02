@@ -7,7 +7,7 @@ Console.WriteLine("---------------------------------");
 Console.WriteLine("Evidence Pojistenych");
 Console.WriteLine("---------------------------------");
 
-char choice = '0';
+var choice = '0';
 while (choice != '5')
 {
     Console.WriteLine();
@@ -57,12 +57,10 @@ while (choice != '5')
                 var command = connection.CreateCommand();
                 command.CommandText = "SELECT name FROM sqlite_master WHERE type='table';";
 
-                using (var reader = command.ExecuteReader())
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine($"Tabulka: {reader.GetString(0)}");
-                    }
+                    Console.WriteLine($"Tabulka: {reader.GetString(0)}");
                 }
             }
     }
