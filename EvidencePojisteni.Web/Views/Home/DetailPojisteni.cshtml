@@ -1,9 +1,41 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    
 *@
 @{
-    <div class="text-center">
-        <h1 class="display-4">Detail Pojisteni</h1>
-        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>
+    ViewData["Title"] = "Detail Pojištění";
 }
+<div class="container">
+    <h1>Detail Pojištění</h1>
+    <div class="">
+        <span class="label">Typ pojištění</span>
+        <span class="value">Typ pojištění</span>
+    </div>
+    <div class="">
+        <span class="label">Pojištěná osoba</span>
+        <span class="value">Jmeno</span>
+    </div>
+    <div class="">
+        <span class="label">Platnost od</span>
+        <span class="value">01.01.2025</span>
+    </div>
+    <div class="info-row">
+        <span class="label">Platnost do</span>
+        <span class="value">31.12.2025</span>
+    </div>
+    <div class="">
+        <span class="label">Měsíční pojistné</span>
+        <span class="value">1 200 Kč</span>
+    </div>
+    <div class="">
+        <span class="label">Pojištěná částka</span>
+        <span class="value">1 000 000 Kč</span>
+    </div>
+    <div class="">
+        <span class="label">Stav</span>
+        <span class="value">Aktivní</span>
+    </div>
+    <div class="actions">
+        <button class="secondary" type="button">Zpět</button>
+        <button type="button">Upravit</button>
+    </div>
+</div>

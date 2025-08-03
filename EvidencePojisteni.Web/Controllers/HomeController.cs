@@ -46,6 +46,11 @@ namespace EvidencePojisteni.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult NovePojisteni()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
