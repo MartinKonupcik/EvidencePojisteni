@@ -7,7 +7,7 @@ Console.WriteLine("---------------------------------");
 Console.WriteLine("Evidence Pojistenych");
 Console.WriteLine("---------------------------------");
 
-char choice = '0';
+var choice = '0';
 while (choice != '5')
 {
     Console.WriteLine();
@@ -45,6 +45,25 @@ while (choice != '5')
         default:
             Console.WriteLine("Neplatná volba. Zkuste to znovu.");
             break;
-                      
+            
+
+
+
+            using (var connection = new SqliteConnection("Data Source=evidence.db"))
+            {
+                connection.Open();
+
+                
+                var command = connection.CreateCommand();
+                command.CommandText = "SELECT name FROM sqlite_master WHERE type='table';";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Console.WriteLine($"Tabulka: {reader.GetString(0)}");
+                    }
+                }
+            }
     }
 }
