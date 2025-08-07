@@ -1,4 +1,6 @@
-﻿namespace EvidencePojisteni.API.Services
+﻿using System.Diagnostics.Contracts;
+
+namespace EvidencePojisteni.API.Services
 {
     public class PolicyService
     {
@@ -44,16 +46,16 @@
             await Task.Delay(100).ConfigureAwait(false);
         }
 
-        public string Delete(Guid policyId)
+        public async Task<string> Delete(Guid id)
         {
-            var toDelete = _policy.Where(x => x.Id == policyId);
+            var toDelete = _policy.Where(x => x.Id == id);
             if (toDelete.Count() == 0)
             {
                 return "NotFound";
             }
+
             _ = _policy.Remove(toDelete.Single());
             return "Deleted";
         }
-}
     }
 }

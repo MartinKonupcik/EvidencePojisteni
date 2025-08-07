@@ -35,16 +35,27 @@ namespace EvidencePojisteni.API.Controllers
             return Ok(allPolicies);
         }
 
+        /// <summary>
+        /// Creates a new policy record.
+        /// </summary>
+        /// <param name="policy">The policy object to create.</param>
         [HttpPost]
         public async Task New([FromBody] Policy policy)
         {
             await service.Create(policy);
         }
 
+        /// <summary>
+        /// Deletes a policy record by its ID.
+        /// </summary>
+        /// <param name="policyID">The ID of the policy to delete.</param>
+        /// <returns>
+        /// 200 OK if deleted; otherwise, 404 Not Found.
+        /// </returns>
         [HttpDelete("{id:Guid}")]
-        public async Task<ActionResult> Delete([FromRoute] Guid id)
+        public async Task<ActionResult> Delete([FromRoute] Guid policyID)
         {
-            var result = await service.Delete(id);
+            var result = await service.Delete(policyID);
 
             if (result == "Deleted")
             {

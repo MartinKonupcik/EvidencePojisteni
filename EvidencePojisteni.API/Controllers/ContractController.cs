@@ -36,17 +36,29 @@ public class ContractController(ContractService service) : ControllerBase
         var allContracts = await service.GetList();
         return Ok(allContracts);
     }
-
+    /// <summary>
+    /// Creates a new contract record.
+    /// </summary>
+    /// <param name="contract">The contract object to create.</param>
+    /// <returns>
+    /// 201 Created if successful; otherwise, 400 Bad Request.
+    /// </returns>
     [HttpPost]
     public async Task New([FromBody] Contract contract)
     {
         await service.Create(contract);
     }
-
+    /// <summary>
+    /// Deletes a contract record by its ID.
+    /// </summary>
+    /// <param name="contractID">The ID of the contract to delete.</param>
+    /// <returns>
+    /// 200 OK if deleted; otherwise, 404 Not Found.
+    /// </returns>
     [HttpDelete("{Contractid:Guid}")]
-    public async Task<ActionResult> Delete([FromRoute] Guid id)
+    public async Task<ActionResult> Delete([FromRoute] Guid contractID)
     {
-        var result = await service.Delete(id);
+        var result = await service.Delete(contractID);
 
         if (result == "Deleted")
         {
