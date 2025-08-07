@@ -22,9 +22,4 @@ public class Person
         Phone = phone;
         Age = age;
     }
-
-    public override string ToString()
-    {
-        return $"{PersonNumber}, {FirstName} {LastName}, Phone: {Phone}, Age: {Age}";
-    }
 }

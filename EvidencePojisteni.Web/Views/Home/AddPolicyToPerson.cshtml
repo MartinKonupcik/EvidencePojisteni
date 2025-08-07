@@ -1,0 +1,37 @@
+﻿    @model EvidencePojisteni.Web.Class.PojisteniPojisteneOsobyViewModel
+
+@{
+    ViewData["Title"] = "Add Insurance to Person";
+}
+<div class="container">
+    <h2>Add insurance to @Model.Person.FirstName @Model.Person.LastName</h2>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Policy.InsuranceType">Insurance Type</label>
+            <select asp-for="Policy.InsuranceType" class="form-control">
+                <option value="property">Property Insurance</option>
+                <option value="vehicle">Vehicle Insurance</option>
+                <option value="life">Life Insurance</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Contract.Amount">Amount</label>
+            <input asp-for="Contract.Amount" type="number" class="form-control" placeholder="10000000" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Policy.InsuranceName">Insurance Subject</label>
+            <input asp-for="Policy.InsuranceName" type="text" class="form-control" placeholder="Apartment" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Contract.ValidFrom">Valid From</label>
+            <input asp-for="Contract.ValidFrom" type="text" class="form-control" placeholder="1.1.2025" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Contract.ValidTo">Valid To</label>
+            <input asp-for="Contract.ValidTo" type="text" class="form-control" placeholder="31.12.2025" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

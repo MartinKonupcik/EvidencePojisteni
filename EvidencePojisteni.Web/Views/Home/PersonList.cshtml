@@ -18,15 +18,15 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="DetailPerson" asp-route-id="@person.PersonNumber">
+                        <a asp-action="DetailPerson" asp-route-id="@person.PersonId">
                             @person.FirstName
                         </a>
                     </td>
                     <td>@person.LastName</td>
                     <td>@person.Phone</td>
                     <td>
-                        <a class="btn btn-yellow" asp-action="EditPerson" asp-route-id="@person.PersonNumber">Edit</a>
-                        <a class="btn btn-red" asp-action="DeletePerson" asp-route-id="@person.PersonNumber">Delete</a>
+                        <a class="btn btn-yellow" asp-action="EditPerson" asp-route-id="@person.PersonId">Edit</a>
+                        <a class="btn btn-red" asp-action="DeletePerson" asp-route-id="@person.PersonId">Delete</a>
                     </td>
                 </tr>
             }
