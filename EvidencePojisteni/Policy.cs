@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EvidencePojisteni
+﻿namespace EvidencePojisteni
 {
     public class Policy
     {
         public Guid Id { get; set; }
-        public required string InsuranceType { get; set; }
-        public required string InsuranceName { get; set; }
+        public  string InsuranceType { get; set; }
+        public  string InsuranceName { get; set; }
+
+        public Policy(string insuranceType, string insuranceName)
+        {
+            InsuranceType = insuranceType;
+            InsuranceName = insuranceName;
+        }
     }
 }
