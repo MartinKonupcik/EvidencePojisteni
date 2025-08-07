@@ -1,22 +1,23 @@
 ﻿using EvidencePojisteni;
 using Microsoft.Data.Sqlite;
 
-var sprava = new Sprava();
+var function = new Function();
 
 Console.WriteLine("---------------------------------");
-Console.WriteLine("Evidence Pojistenych");
+Console.WriteLine("Insured Persons Registry");
 Console.WriteLine("---------------------------------");
+
 
 var choice = '0';
 while (choice != '5')
 {
     Console.WriteLine();
-    Console.WriteLine("Vyberte si akci:");
-    Console.WriteLine("1 - Přidat nového pojištěného");
-    Console.WriteLine("2 - Vypsat všechny pojištěné");
-    Console.WriteLine("3 - Vyhledat pojištěného podle jmena i přijmeni");
-    Console.WriteLine("4 - Vyhledat pojištěného podle jmena nebo přijmeni");
-    Console.WriteLine("5 - Konec");
+    Console.WriteLine("Select an action:");
+    Console.WriteLine("1 - Add a new insured person");
+    Console.WriteLine("2 - List all insured persons");
+    Console.WriteLine("3 - Find insured person by first and last name");
+    Console.WriteLine("4 - Find insured person by first or last name");
+    Console.WriteLine("5 - Exit");
 
     choice = Console.ReadKey().KeyChar;
     Console.WriteLine();
@@ -24,46 +25,43 @@ while (choice != '5')
     switch (choice)
     {
         case '1':
-            sprava.PridatPojistence(); 
+            manager.AddPerson();
             break;
 
         case '2':
-            sprava.VypisPojistencu();
+            manager.ListPeople();
             break;
 
         case '3':
-            sprava.VyhledatPojistenceJmenoiPrijmeni();
+            manager.FindPersonByFirstAndLastName();
             break;
 
-            case '4':
-                sprava.VyhledatPojistenceJmenoNeboPrijmeni();
+        case '4':
+            manager.FindPersonByFirstOrLastName();
             break;
+
         case '5':
-            Console.WriteLine("Děkuji za použití aplikace.");
+            Console.WriteLine("Thank you for using the application.");
             break;
 
         default:
-            Console.WriteLine("Neplatná volba. Zkuste to znovu.");
+            Console.WriteLine("Invalid choice. Please try again.");
             break;
-            
+    }
 
+    using (var connection = new SqliteConnection("Data Source=registry.db"))
+    {
+        connection.Open();
 
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT name FROM sqlite_master WHERE type='table';";
 
-            using (var connection = new SqliteConnection("Data Source=evidence.db"))
+        using (var reader = command.ExecuteReader())
+        {
+            while (reader.Read())
             {
-                connection.Open();
-
-                
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT name FROM sqlite_master WHERE type='table';";
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine($"Tabulka: {reader.GetString(0)}");
-                    }
-                }
+                Console.WriteLine($"Table: {reader.GetString(0)}");
             }
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 public class PojisteniService
 {
-    private List<Pojisteni> _pojisteni =
+    private List<Insurance> _pojisteni =
     [
         new()
         {
@@ -26,7 +26,7 @@ public class PojisteniService
         }
     ];
 
-    public async Task<Pojisteni?> Get(int id)
+    public async Task<Insurance?> Get(int id)
     {
         // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
@@ -34,7 +34,7 @@ public class PojisteniService
         return _pojisteni.SingleOrDefault(p => p.Id == id);
     }
 
-    public async Task<Pojisteni[]> GetList()
+    public async Task<Insurance[]> GetList()
     {
         // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
@@ -42,7 +42,7 @@ public class PojisteniService
         return [.. _pojisteni];
     }
 
-    public async Task Create(Pojisteni pojisteni)
+    public async Task Create(Insurance pojisteni)
     {
         for (var i = 0; i <= _pojisteni.Count; i++)
         {

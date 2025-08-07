@@ -1,0 +1,43 @@
+﻿
+
+@{
+    
+}
+@model EvidencePojisteni.Person[]
+<div class="container">
+    <h1>Pojištěnci</h1>
+    <div>
+        <a class="btn btn-blue" asp-action="NovyPojistenec" asp-controller="Home">Nový pojištěnec</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Adresa</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a asp-action="DetailPojistence" asp-route-id="@Model">
+						@Model.
+                    </a>
+                </td>
+                <td>@Model.</td>
+                <td>
+                    <a class="btn btn-yellow" asp-action="EditovatPojistence" asp-route-id="@Model.">Editovat</a>
+                    <a class="btn btn-red" asp-action="OdstranitPojistence" asp-route-id="@Model.">Odstranit</a>
+                </td>
+            </tr>
+            </tbody>
+    </table>
+    <div class="pagination">
+        <button class="pagination-btn" disabled>Předchozí</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">Další</button>
+    </div>
+</div>

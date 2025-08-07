@@ -1,34 +1,33 @@
-﻿@*
-    
-*@
+﻿@model EvidencePojisteni.Web.Class.PojisteniPojisteneOsobyViewModel
 @{
     ViewData["Title"] = "Detail Pojištění";
 }
+
 <div class="container">
     <h1>Detail Pojištění</h1>
     <div class="">
         <span class="label">Typ pojištění</span>
-        <span class="value">Typ pojištění</span>
+        <span class="value">@Model.Pojisteni.Typ</span>
     </div>
     <div class="">
         <span class="label">Pojištěná osoba</span>
-        <span class="value">@Model.Jmeno</span>
+        <span class="value">@Model.Osoba.Jmeno @Model.Osoba.Prijmeni</span>
     </div>
     <div class="">
         <span class="label">Platnost od</span>
-        <span class="value">@Model.PlatnostOd</span>
+        <span class="value">@Model.Pojisteni.PlatnostOd</span>
     </div>
     <div class="info-row">
         <span class="label">Platnost do</span>
-        <span class="value">@Model.PlatnostDo</span>
+        <span class="value">@Model.Pojisteni.PlatnostDo</span>
     </div>
     <div class="">
         <span class="label">Pojištěná částka</span>
-        <span class="value">@Model.Castka</span>
+        <span class="value">@Model.Pojisteni.Castka</span>
     </div>
     <div class="">
         <span class="label">Stav</span>
-        <span class="value">Aktivní</span>
+        <span class="value">@Model.Pojisteni.Aktivni</span>
     </div>
     <div class="actions">
         <button class="secondary" type="button">Zpět</button>

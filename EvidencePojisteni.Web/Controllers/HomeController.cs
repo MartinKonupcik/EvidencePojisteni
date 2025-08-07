@@ -8,6 +8,7 @@ namespace EvidencePojisteni.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -25,7 +26,13 @@ namespace EvidencePojisteni.Web.Controllers
 
         public IActionResult Pojistenci()
         {
-            return View();
+            Person[] pojistenci = new Person[]
+            {
+                new Person("Jan", "Novák", "123456789", 30),
+                new Person("Eva", "Svobodová", "987654321", 25),
+                new Person("Petr", "Dvoøák", "456789123", 40)
+            };
+            return View(pojistenci);
         }
 
         public IActionResult DetailPojisteni()
