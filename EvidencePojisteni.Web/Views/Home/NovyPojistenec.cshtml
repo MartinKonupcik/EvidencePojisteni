@@ -1,40 +1,40 @@
 ﻿@model EvidencePojisteni.Person
 
 @{
-    ViewData["Title"] = "Nový pojištěnec";
+    ViewData["Title"] = "New Person";
 }
 
-<h2>Nový pojištěnec</h2>
-<form action="/Pojistenci/Create" method="post">
+<h2>New Person</h2>
+<form action="/Persons/Create" method="post">
     <div>
-        <label for="Jmeno">Jméno</label>
-        <input type="text" id="Jmeno" name="Jmeno" class="" placeholder="Jan" />
+        <label for="FirstName">First Name</label>
+        <input type="text" id="FirstName" name="FirstName" class="" placeholder="John" />
     </div>
     <div>
-        <label for="Prijmeni">Příjmení</label>
-        <input type="text" id="Prijmeni" name="Prijmeni" class="" placeholder="Novák" />
+        <label for="LastName">Last Name</label>
+        <input type="text" id="LastName" name="LastName" class="" placeholder="Smith" />
     </div>
     <div>
         <label for="Email">Email</label>
-        <input type="email" id="Email" name="Email" class="" placeholder="jannovak88@seznam.cz" />
+        <input type="email" id="Email" name="Email" class="" placeholder="johnsmith88@email.com" />
     </div>
     <div>
-        <label for="Telefon">Telefon</label>
-        <input type="text" id="Telefon" name="Telefon" class="" placeholder="731 584 972" />
+        <label for="Phone">Phone</label>
+        <input type="text" id="Phone" name="Phone" class="" placeholder="731 584 972" />
     </div>
     <div>
-        <label for="Ulice">Ulice a číslo popisné</label>
-        <input type="text" id="Ulice" name="Ulice" class="" placeholder="Ve Svahu 3" />
+        <label for="Street">Street and Number</label>
+        <input type="text" id="Street" name="Street" class="" placeholder="Main St 3" />
     </div>
     <div>
-        <label for="Mesto">Město</label>
-        <input type="text" id="Mesto" name="Mesto" class="" placeholder="Praha 1" />
+        <label for="City">City</label>
+        <input type="text" id="City" name="City" class="" placeholder="Prague 1" />
     </div>
     <div>
-        <label for="PSC">PSČ</label>
-        <input type="text" id="PSC" name="PSC" class="" placeholder="100 00" />
+        <label for="ZipCode">ZIP Code</label>
+        <input type="text" id="ZipCode" name="ZipCode" class="" placeholder="100 00" />
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Uložit</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>

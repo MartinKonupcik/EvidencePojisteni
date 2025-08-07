@@ -1,45 +1,44 @@
 ﻿@model EvidencePojisteni.Web.Class.PojisteniPojisteneOsobyViewModel
 @{
-    ViewData["Title"] = "Detail Pojištěnce";
+    ViewData["Title"] = "Insured Person Details";
 }
 <div class="profile-info">
-    <h2>@Model.Osoba.Jmeno</h2>
+    <h2>@Model.Osoba.FirstName</h2>
     <div class="profile-details">
         <div class="col">
          </div>
         <div class="col">
-            
-@Model.Osoba.Telefon        </div>
+            @Model.Osoba.Phone
+        </div>
     </div>
 </div>
 </div>
 
-<div class=>
-    <h3>Sjednaná pojištění</h3>
-    <table class=>
+<div>
+    <h3>Arranged Insurances</h3>
+    <table>
         <tr>
-            <th>@Model.Pojisteni.Typ</th>
-            <th>@Model.Pojisteni.Castka</th>
+            <th>@Model.Pojisteni.Type</th>
+            <th>@Model.Pojisteni.Amount</th>
             <th></th>
         </tr>
         <tr>
             <td>
-                <a asp-controller="Home" asp-action="DetailPojisteni" asp-route-id="">@Model.Pojisteni.Typ</a>
+                <a asp-controller="Home" asp-action="DetailInsurance" asp-route-id="">@Model.Pojisteni.Type</a>
             </td>
-            <td>@Model.Pojisteni.Castka</td>
+            <td>@Model.Pojisteni.Amount</td>
             <td>
-                <div class="">
-                    <button class="btn btn-red">Odstranit</button>
-                    <button class="btn btn-yellow">Editovat</button>
+                <div>
+                    <button class="btn btn-red">Delete</button>
+                    <button class="btn btn-yellow">Edit</button>
                 </div>
             </td>
         </tr>
     </table>
 
     <div class="action-bar">
-        <button class="btn btn-blue">Přidat pojištění</button>
-        <button class="btn btn-yellow">Editovat pojištěnce</button>
-        <button class="btn btn-red">Odstranit pojištěnce</button>
+        <button class="btn btn-blue">Add Insurance</button>
+        <button class="btn btn-yellow">Edit Person</button>
+        <button class="btn btn-red">Delete Person</button>
     </div>
-</div>
 </div>

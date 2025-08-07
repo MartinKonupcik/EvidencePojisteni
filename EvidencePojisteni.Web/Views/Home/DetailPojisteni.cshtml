@@ -1,36 +1,36 @@
 ﻿@model EvidencePojisteni.Web.Class.PojisteniPojisteneOsobyViewModel
 @{
-    ViewData["Title"] = "Detail Pojištění";
+    ViewData["Title"] = "Insurance Details";
 }
 
 <div class="container">
-    <h1>Detail Pojištění</h1>
-    <div class="">
-        <span class="label">Typ pojištění</span>
-        <span class="value">@Model.Pojisteni.Typ</span>
+    <h1>Insurance Details</h1>
+    <div>
+        <span class="label">Insurance Type</span>
+        <span class="value">@Model.Pojisteni.Type</span>
     </div>
-    <div class="">
-        <span class="label">Pojištěná osoba</span>
-        <span class="value">@Model.Osoba.Jmeno @Model.Osoba.Prijmeni</span>
+    <div>
+        <span class="label">Insured Person</span>
+        <span class="value">@Model.Osoba.FirstName @Model.Osoba.LastName</span>
     </div>
-    <div class="">
-        <span class="label">Platnost od</span>
-        <span class="value">@Model.Pojisteni.PlatnostOd</span>
+    <div>
+        <span class="label">Valid From</span>
+        <span class="value">@Model.Pojisteni.ValidFrom</span>
     </div>
     <div class="info-row">
-        <span class="label">Platnost do</span>
-        <span class="value">@Model.Pojisteni.PlatnostDo</span>
+        <span class="label">Valid To</span>
+        <span class="value">@Model.Pojisteni.ValidTo</span>
     </div>
-    <div class="">
-        <span class="label">Pojištěná částka</span>
-        <span class="value">@Model.Pojisteni.Castka</span>
+    <div>
+        <span class="label">Insured Amount</span>
+        <span class="value">@Model.Pojisteni.Amount</span>
     </div>
-    <div class="">
-        <span class="label">Stav</span>
-        <span class="value">@Model.Pojisteni.Aktivni</span>
+    <div>
+        <span class="label">Status</span>
+        <span class="value">@Model.Pojisteni.Active</span>
     </div>
     <div class="actions">
-        <button class="secondary" type="button">Zpět</button>
-        <button type="button">Upravit</button>
+        <button class="secondary" type="button">Back</button>
+        <button type="button">Edit</button>
     </div>
 </div>
