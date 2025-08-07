@@ -19,42 +19,32 @@ namespace EvidencePojisteni.Web.Controllers
             return View();
         }
 
-        public IActionResult Pojisteni()
+        public IActionResult Policy()
         {
             return View();
         }
 
-        public IActionResult Pojistenci()
+        public IActionResult Person()
         {
-            Person[] pojistenci = new Person[]
+            Person[] person = new Person[]
             {
                 new Person("Jan", "Novák", "123456789", 30),
                 new Person("Eva", "Svobodová", "987654321", 25),
                 new Person("Petr", "Dvoøák", "456789123", 40)
             };
-            return View(pojistenci);
+            return View(person);
         }
 
-        public IActionResult DetailPojisteni()
+        public IActionResult DetailPolicy()
         {
             return View();
         }
-        public IActionResult PridatPojisteniPojistenci()
-        {
-            return View();
-        }
-
-        public IActionResult DetailPojistence()
+        public IActionResult AddPolicyToPerson()
         {
             return View();
         }
 
-        public IActionResult NovyPojistenec()
-        {
-            return View();
-        }
-
-        public IActionResult NovePojisteni()
+        public IActionResult NewPerson()
         {
             return View();
         }
