@@ -5,9 +5,9 @@ namespace EvidencePojisteni.API.Controllers;
 /// <summary>
 /// API controller for managing insurance records.
 /// </summary>
-[Route("pojisteni")]
+[Route("Insurance")]
 [ApiController]
-public class InsuranceController(PojisteniService service) : ControllerBase
+public class InsuranceController(InsuranceService service) : ControllerBase
 {
     /// <summary>
     /// Gets a specific insurance record by its ID.
@@ -19,9 +19,9 @@ public class InsuranceController(PojisteniService service) : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Insurance>> Get([FromRoute] int id)
     {
-        var pojisteni = await service.Get(id);
+        var insurance = await service.Get(id);
 
-        return pojisteni is null ? NotFound() : Ok(pojisteni);
+        return insurance is null ? NotFound() : Ok(insurance);
     }
 
     /// <summary>
@@ -33,14 +33,14 @@ public class InsuranceController(PojisteniService service) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<Insurance[]>> GetList()
     {
-        var allPojisteni = await service.GetList();
-        return Ok(allPojisteni);
+        var allInsurance = await service.GetList();
+        return Ok(allInsurance);
     }
 
     [HttpPost]
-    public async Task New([FromBody] Insurance pojisteni)
+    public async Task New([FromBody] Insurance insurance)
     {
-        await service.Create(pojisteni);
+        await service.Create(insurance);
     }
 
     [HttpDelete("{id:int}")]
