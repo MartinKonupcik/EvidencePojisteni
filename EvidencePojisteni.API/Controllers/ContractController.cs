@@ -3,48 +3,48 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers;
 /// <summary>
-/// API controller for managing insurance records.
+/// API controller for managing contract records.
 /// </summary>
-[Route("Insurance")]
+[Route("Contract")]
 [ApiController]
-public class ContractController(InsuranceService service) : ControllerBase
+public class ContractController(ContractService service) : ControllerBase
 {
     /// <summary>
-    /// Gets a specific insurance record by its ID.
+    /// Gets a specific contract record by its ID.
     /// </summary>
-    /// <param name="id">The ID of the insurance record.</param>
+    /// <param name="id">The ID of the contract record.</param>
     /// <returns>
-    /// The insurance record if found; otherwise, a 404 Not Found response.
+    /// The contract record if found; otherwise, a 404 Not Found response.
     /// </returns>
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<Contract>> Get([FromRoute] int id)
+    [HttpGet("{Contractid:Guid}")]
+    public async Task<ActionResult<Contract>> Get([FromRoute] Guid id)
     {
-        var insurance = await service.Get(id);
+        var contract = await service.Get(id);
 
-        return insurance is null ? NotFound() : Ok(insurance);
+        return contract is null ? NotFound() : Ok(contract);
     }
 
     /// <summary>
-    /// Gets a list of all insurance records.
+    /// Gets a list of all contract records.
     /// </summary>
     /// <returns>
-    /// An array of all insurance records.
+    /// An array of all contract records.
     /// </returns>
     [HttpGet]
     public async Task<ActionResult<Contract[]>> GetList()
     {
-        var allInsurance = await service.GetList();
-        return Ok(allInsurance);
+        var allContracts = await service.GetList();
+        return Ok(allContracts);
     }
 
     [HttpPost]
-    public async Task New([FromBody] Contract insurance)
+    public async Task New([FromBody] Contract contract)
     {
-        await service.Create(insurance);
+        await service.Create(contract);
     }
 
-    [HttpDelete("{id:int}")]
-    public async Task<ActionResult> Delete([FromRoute] int id)
+    [HttpDelete("{Contractid:Guid}")]
+    public async Task<ActionResult> Delete([FromRoute] Guid id)
     {
         var result = await service.Delete(id);
 

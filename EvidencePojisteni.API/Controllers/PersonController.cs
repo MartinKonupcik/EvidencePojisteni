@@ -12,17 +12,17 @@ namespace EvidencePojisteni.API.Controllers
         /// <summary>
         /// Gets a specific person record by their person number.
         /// </summary>
-        /// <param name="PersonNumber">The person number in the registry.</param>
+        /// <param name="PersonId">The person number in the registry.</param>
         /// <returns>
         /// The person record if found; otherwise, a 404 Not Found response.
         /// </returns>
-        [HttpGet("{PersonNumber:int}")]
-        public async Task<ActionResult<Person>> Get([FromRoute] int PersonNumber)
+        [HttpGet("{PersonId:Guid}")]
+        public async Task<ActionResult<Person>> Get([FromRoute] Guid PersonId)
         {
-            var person = await service.Get(PersonNumber);
+            var person = await service.Get(PersonId);
 
             return person is null ? NotFound() : Ok(person);
-        }
+        }       
 
         /// <summary>
         /// Gets a list of all person records.
@@ -50,14 +50,14 @@ namespace EvidencePojisteni.API.Controllers
         /// <summary>
         /// Deletes a person record by their person number.
         /// </summary>
-        /// <param name="PersonNumber">The person number of the record to delete.</param>
+        /// <param name="PersonId">The person number of the record to delete.</param>
         /// <returns>
         /// 200 OK if deleted; otherwise, 404 Not Found.
         /// </returns>
-        [HttpDelete("{PersonNumber:int}")]
-        public async Task<ActionResult> Delete([FromRoute] int PersonNumber)
+        [HttpDelete("{PersonID:Guid}")]
+        public async Task<ActionResult> Delete([FromRoute] Guid PersonId)
         {
-            var result = await service.Delete(PersonNumber);
+            var result = service.Delete(PersonId);
 
             if (result == "Deleted")
             {

@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddSingleton<EvidencePojisteni.API.Services.InsuranceService>();
+builder.Services.AddSingleton<EvidencePojisteni.API.Services.ContractService>();
 
 // Add Swagger/OpenAPI services
 builder.Services.AddEndpointsApiExplorer();
