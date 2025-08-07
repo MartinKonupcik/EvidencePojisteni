@@ -3,17 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EvidencePojisteni;
 
-public class Insurance
+public class Contract
 {
     
     [Key]
-    public int Id { get; set; }
-    public string Type { get; set; }
-    public string Subject { get; set; }
-    public decimal Amount { get; set; }
+    public Guid ContractId { get; set; }
     public DateTime ValidFrom { get; set; }
     public DateTime ValidTo { get; set; }
-
+    public decimal Amount { get; set; }
     public bool Active { get; set; } = true;
-    public int PersonNumber { get; set; }
+    public Guid PersonId { get; set; }
+    public Guid PolicyId { get; set; }
 }

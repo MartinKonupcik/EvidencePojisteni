@@ -116,7 +116,7 @@
             Console.WriteLine("Valid to (yyyy-mm-dd):");
             var validTo = DateTime.Parse(ConsoleOperator.ReadNonEmptyString());
 
-            var insurance = new Insurance { Type = type, Subject = subject, Amount = amount, ValidFrom = validFrom, ValidTo = validTo };
+            var insurance = new Contract { Type = type, Subject = subject, Amount = amount, ValidFrom = validFrom, ValidTo = validTo };
             person.Insurances.Add(insurance);
             Console.WriteLine("Insurance added.");
         }

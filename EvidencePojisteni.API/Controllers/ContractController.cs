@@ -7,7 +7,7 @@ namespace EvidencePojisteni.API.Controllers;
 /// </summary>
 [Route("Insurance")]
 [ApiController]
-public class InsuranceController(InsuranceService service) : ControllerBase
+public class ContractController(InsuranceService service) : ControllerBase
 {
     /// <summary>
     /// Gets a specific insurance record by its ID.
@@ -17,7 +17,7 @@ public class InsuranceController(InsuranceService service) : ControllerBase
     /// The insurance record if found; otherwise, a 404 Not Found response.
     /// </returns>
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<Insurance>> Get([FromRoute] int id)
+    public async Task<ActionResult<Contract>> Get([FromRoute] int id)
     {
         var insurance = await service.Get(id);
 
@@ -31,14 +31,14 @@ public class InsuranceController(InsuranceService service) : ControllerBase
     /// An array of all insurance records.
     /// </returns>
     [HttpGet]
-    public async Task<ActionResult<Insurance[]>> GetList()
+    public async Task<ActionResult<Contract[]>> GetList()
     {
         var allInsurance = await service.GetList();
         return Ok(allInsurance);
     }
 
     [HttpPost]
-    public async Task New([FromBody] Insurance insurance)
+    public async Task New([FromBody] Contract insurance)
     {
         await service.Create(insurance);
     }
