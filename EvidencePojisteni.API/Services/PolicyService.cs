@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Contracts;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Contracts;
 
 namespace EvidencePojisteni.API.Services
 {
@@ -6,14 +7,7 @@ namespace EvidencePojisteni.API.Services
     {
         private List<Policy> _policy = new()
         {
-            new Policy("Home Insurance", "Cover home damages")
-            {
-                Id = Guid.NewGuid()
-            },
-            new Policy("Car Insurance", "Cover car damages")
-            {
-                Id = Guid.NewGuid()
-            }
+            
         };
 
         public async Task<Policy?> Get(Guid policyId)
@@ -56,6 +50,19 @@ namespace EvidencePojisteni.API.Services
 
             _ = _policy.Remove(toDelete.Single());
             return "Deleted";
+        }
+        public async Task<bool> Update(Guid policyId, Policy policy)
+        {
+            var existing = _policy.SingleOrDefault(x => x.Id == policyId);
+            if (existing == null)
+                return false;
+
+            existing.Name = policy.Name;
+            
+            // ... other properties
+
+            await Task.Delay(100).ConfigureAwait(false);
+            return true;
         }
     }
 }

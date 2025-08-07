@@ -17,9 +17,9 @@ public class ContractController(ContractService service) : ControllerBase
     /// The contract record if found; otherwise, a 404 Not Found response.
     /// </returns>
     [HttpGet("{Contractid:Guid}")]
-    public async Task<ActionResult<Contract>> Get([FromRoute] Guid id)
+    public async Task<ActionResult<Contract>> Get([FromRoute] Guid Contractid)
     {
-        var contract = await service.Get(id);
+        var contract = await service.Get(Contractid);
 
         return contract is null ? NotFound() : Ok(contract);
     }
@@ -66,5 +66,21 @@ public class ContractController(ContractService service) : ControllerBase
         }
 
         return NotFound();
+    }
+    /// <summary>
+    [HttpPut("{Contractid:Guid}")]
+    public async Task<ActionResult> Update([FromRoute] Guid Contractid, [FromBody] Contract contract)
+    {
+        if (Contractid != contract.ContractId)
+        {
+            return BadRequest("Contract ID mismatch.");
+        }
+        var existingContract = await service.Get(Contractid);
+        if (existingContract is null)
+        {
+            return NotFound();
+        }
+        await service.Update(contract);
+        return NoContent();
     }
 }

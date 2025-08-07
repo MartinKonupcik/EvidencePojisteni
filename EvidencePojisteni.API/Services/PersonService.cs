@@ -1,18 +1,12 @@
-﻿namespace EvidencePojisteni.API.Services
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace EvidencePojisteni.API.Services
 {
     public class PersonService
     {
         private List<Person> _person = new()
         {
-            new Person("Jan", "Novák", "123456789", 30)
-            {
-                PersonId = Guid.NewGuid()
-            },
-
-            new Person("Petr", "Svoboda", "987654321", 45)
-            {
-                PersonId = Guid.NewGuid()
-            }
+           
         };
 
       public async Task<Person?> Get(Guid personId)
@@ -54,6 +48,20 @@
             }
             _ = _person.Remove(toDelete.Single());
             return "Deleted";
+        }
+        public async Task<ActionResult> Update(Guid personId, Person person)
+        {
+            var existingPerson = await Get(personId);
+            if (existingPerson is null)
+            {
+                return new NotFoundResult();
+            }
+            existingPerson.FirstName = person.FirstName;
+            existingPerson.LastName = person.LastName;
+            existingPerson.Age = person.Age;
+            // Simulate async operation
+            await Task.Delay(100).ConfigureAwait(false);
+            return new OkResult();
         }
     }
 }

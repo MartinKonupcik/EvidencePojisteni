@@ -54,7 +54,7 @@ namespace EvidencePojisteni.API.Controllers
         /// <returns>
         /// 200 OK if deleted; otherwise, 404 Not Found.
         /// </returns>
-        [HttpDelete("{PersonID:Guid}")]
+        [HttpDelete("{PersonId:Guid}")]
         public async Task<ActionResult> Delete([FromRoute] Guid PersonId)
         {
             var result = service.Delete(PersonId);
@@ -64,6 +64,21 @@ namespace EvidencePojisteni.API.Controllers
                 return Ok();
             }
             return NotFound();
+        }
+        [HttpPut("{Personid:Guid}")]
+        public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] Person person)
+        {
+            if (personId != person.PersonId)
+            {
+                return BadRequest("Person ID mismatch.");
+            }
+            var existingPerson = await service.Get(personId);
+            if (existingPerson  is null)
+            {
+                return NotFound();
+            }
+            await service.Update(person);
+            return NoContent();
         }
     }
 }

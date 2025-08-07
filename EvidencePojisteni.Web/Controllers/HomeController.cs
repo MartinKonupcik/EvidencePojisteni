@@ -24,7 +24,7 @@ namespace EvidencePojisteni.Web.Controllers
             return View();
         }
 
-        public IActionResult Person()
+        public IActionResult PersonList()
         {
             Person[] person = new Person[]
             {

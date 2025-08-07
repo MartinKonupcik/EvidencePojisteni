@@ -67,4 +67,21 @@ public class ContractService
         _ = _contract.Remove(toDelete.Single());
         return "Deleted";
     }
+
+    public async Task<bool> Update(Contract contract)
+    {
+        var existing = _contract.SingleOrDefault(x => x.ContractId == contract.ContractId);
+        if (existing == null)
+            return false;
+
+        existing.PersonId = contract.PersonId;
+        existing.PolicyId = contract.PolicyId;
+        existing.ValidFrom = contract.ValidFrom;
+        existing.ValidTo = contract.ValidTo;
+        existing.Amount = contract.Amount;
+        existing.Active = contract.Active;
+
+        await Task.Delay(100).ConfigureAwait(false);
+        return true;
+    }
 }

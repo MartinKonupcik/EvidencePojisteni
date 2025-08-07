@@ -10,14 +10,14 @@ namespace EvidencePojisteni.API.Controllers
         /// <summary>
         /// Gets a specific policy record by its ID.
         /// </summary>
-        /// <param name="id">The ID of the policy record.</param>
+        /// <param name="PolicyId">The ID of the policy record.</param>
         /// <returns>
         /// The policy record if found; otherwise, a 404 Not Found response.
         /// </returns>
-        [HttpGet("{id:Guid}")]
-        public async Task<ActionResult<Policy>> Get([FromRoute] Guid id)
+        [HttpGet("{PolicyId:Guid}")]
+        public async Task<ActionResult<Policy>> Get([FromRoute] Guid PolicyId)
         {
-            var policy = await service.Get(id);
+            var policy = await service.Get(PolicyId);
 
             return policy is null ? NotFound() : Ok(policy);
         }
@@ -48,20 +48,42 @@ namespace EvidencePojisteni.API.Controllers
         /// <summary>
         /// Deletes a policy record by its ID.
         /// </summary>
-        /// <param name="policyID">The ID of the policy to delete.</param>
+        /// <param name="PolicyId">The ID of the policy to delete.</param>
         /// <returns>
         /// 200 OK if deleted; otherwise, 404 Not Found.
         /// </returns>
-        [HttpDelete("{id:Guid}")]
-        public async Task<ActionResult> Delete([FromRoute] Guid policyID)
+        [HttpDelete("{PolicyId:Guid}")]
+        public async Task<ActionResult> Delete([FromRoute] Guid PolicyId)
         {
-            var result = await service.Delete(policyID);
+            var result = await service.Delete(PolicyId);
 
             if (result == "Deleted")
             {
                 return Ok();
             }
             return NotFound();
+        }
+        /// <summary>
+        ///  Updates an existing policy record.
+        /// </summary>
+        /// <param name="PolicyId">The ID of the policy to update.</param>
+        /// <param name="policy">The updated policy object.</param>
+        /// <returns>
+        /// 204 No Content if updated; otherwise, 404 Not Found.
+        /// </returns>
+        [HttpPut("{PolicyId:Guid}")]
+        public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] Policy policy)
+        {
+            if (PolicyId != policy.Id)
+            {
+                return BadRequest("Policy ID mismatch.");
+            }
+            var updated = await service.Update(PolicyId, policy);
+            if (!updated)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

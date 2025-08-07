@@ -3,13 +3,14 @@
     public class Policy
     {
         public Guid Id { get; set; }
-        public  string InsuranceType { get; set; }
-        public  string InsuranceName { get; set; }
-
-        public Policy(string insuranceType, string insuranceName)
+        public enum Type
         {
-            InsuranceType = insuranceType;
-            InsuranceName = insuranceName;
+            Life,
+            Health,
+            Property,
+            Vehicle,
+            Travel
         }
+        public string Name { get; set; } = null!;
     }
 }
