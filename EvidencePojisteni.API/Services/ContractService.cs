@@ -72,7 +72,9 @@ public class ContractService
     {
         var existing = _contract.SingleOrDefault(x => x.ContractId == contract.ContractId);
         if (existing == null)
+        {
             return false;
+        }
 
         existing.PersonId = contract.PersonId;
         existing.PolicyId = contract.PolicyId;

@@ -55,10 +55,10 @@ public class ContractController(ContractService service) : ControllerBase
     /// <returns>
     /// 200 OK if deleted; otherwise, 404 Not Found.
     /// </returns>
-    [HttpDelete("{Contractid:Guid}")]
-    public async Task<ActionResult> Delete([FromRoute] Guid contractID)
+    [HttpDelete("{ContractId:Guid}")]
+    public async Task<ActionResult> Delete([FromRoute] Guid contractId)
     {
-        var result = await service.Delete(contractID);
+        var result = await service.Delete(contractId);
 
         if (result == "Deleted")
         {
@@ -68,14 +68,14 @@ public class ContractController(ContractService service) : ControllerBase
         return NotFound();
     }
     /// <summary>
-    [HttpPut("{Contractid:Guid}")]
-    public async Task<ActionResult> Update([FromRoute] Guid Contractid, [FromBody] Contract contract)
+    [HttpPut("{ContractId:Guid}")]
+    public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] Contract contract)
     {
-        if (Contractid != contract.ContractId)
+        if (ContractId != contract.ContractId)
         {
             return BadRequest("Contract ID mismatch.");
         }
-        var existingContract = await service.Get(Contractid);
+        var existingContract = await service.Get(ContractId);
         if (existingContract is null)
         {
             return NotFound();

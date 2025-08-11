@@ -65,7 +65,7 @@ namespace EvidencePojisteni.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut("{Personid:Guid}")]
+        [HttpPut("{PersonId:Guid}")]
         public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] Person person)
         {
             if (personId != person.PersonId)

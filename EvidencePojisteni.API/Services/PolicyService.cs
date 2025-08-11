@@ -55,7 +55,9 @@ namespace EvidencePojisteni.API.Services
         {
             var existing = _policy.SingleOrDefault(x => x.Id == policyId);
             if (existing == null)
+            {
                 return false;
+            }
 
             existing.Name = policy.Name;
             
