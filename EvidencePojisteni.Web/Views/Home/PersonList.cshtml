@@ -1,0 +1,42 @@
+﻿@model EvidencePojisteni.Person[]
+<div class="container">
+    <h1>Persons</h1>
+    <div>
+        <a class="btn btn-blue" asp-action="NewPerson" asp-controller="Home">New Person</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="DetailPerson" asp-route-id="@person.PersonId">
+                            @person.FirstName
+                        </a>
+                    </td>
+                    <td>@person.LastName</td>
+                    <td>@person.Phone</td>
+                    <td>
+                        <a class="btn btn-yellow" asp-action="EditPerson" asp-route-id="@person.PersonId">Edit</a>
+                        <a class="btn btn-red" asp-action="DeletePerson" asp-route-id="@person.PersonId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button class="pagination-btn" disabled>Previous</button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">Next</button>
+    </div>
+</div>

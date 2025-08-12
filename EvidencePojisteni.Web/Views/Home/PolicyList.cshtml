@@ -1,0 +1,14 @@
+﻿@model EvidencePojisteni.Policy
+
+@{
+    ViewData["Title"] = "Policy";
+}
+<form method="post">
+    <div class="form-group">
+        <label for="InsuranceType">Insurance Type</label>
+        <select asp-for="InsuranceType" asp-items="@(new SelectList(Model.InsuranceType))" class="form-control">
+            <option value="">-- Select --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

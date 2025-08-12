@@ -1,0 +1,40 @@
+﻿@model EvidencePojisteni.Person
+
+@{
+    ViewData["Title"] = "New Person";
+}
+
+<h2>New Person</h2>
+<form action="/Persons/Create" method="post">
+    <div>
+        <label for="FirstName">First Name</label>
+        <input type="text" id="FirstName" name="FirstName" class="" placeholder="John" />
+    </div>
+    <div>
+        <label for="LastName">Last Name</label>
+        <input type="text" id="LastName" name="LastName" class="" placeholder="Smith" />
+    </div>
+    <div>
+        <label for="Email">Email</label>
+        <input type="email" id="Email" name="Email" class="" placeholder="johnsmith88@email.com" />
+    </div>
+    <div>
+        <label for="Phone">Phone</label>
+        <input type="text" id="Phone" name="Phone" class="" placeholder="731 584 972" />
+    </div>
+    <div>
+        <label for="Street">Street and Number</label>
+        <input type="text" id="Street" name="Street" class="" placeholder="Main St 3" />
+    </div>
+    <div>
+        <label for="City">City</label>
+        <input type="text" id="City" name="City" class="" placeholder="Prague 1" />
+    </div>
+    <div>
+        <label for="ZipCode">ZIP Code</label>
+        <input type="text" id="ZipCode" name="ZipCode" class="" placeholder="100 00" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
