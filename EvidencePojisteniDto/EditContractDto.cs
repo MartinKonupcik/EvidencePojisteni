@@ -8,9 +8,9 @@ namespace EvidencePojisteniDto
 {
     public class EditContractDto
     {
-        public Guid ContractId { get; set; }
-        public decimal Amount { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
+        public decimal Amount { get; set; }
+        public bool Active { get; set; } = true;
     }
 }

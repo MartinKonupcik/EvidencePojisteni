@@ -8,5 +8,14 @@ namespace EvidencePojisteniDto
 {
     public class EditPolicyDto
     {
+        public enum Type
+        {
+            Life,
+            Health,
+            Property,
+            Vehicle,
+            Travel
+        }
+        public string Name { get; set; }
     }
 }
