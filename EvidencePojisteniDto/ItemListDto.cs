@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvidencePojisteniDto
 {
-    public class InsuranceListDto
+    public class ItemListDto
     {
         public Guid Id { get; set; }
         public Guid ContractId { get; set; }

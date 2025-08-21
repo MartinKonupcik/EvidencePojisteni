@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EvidencePojisteniDto
 {
-    public class UpdateInsuranceDto
+    public class EditContractDto
     {
-        public Guid Id { get; set; }
+        public Guid ContractId { get; set; }
         public decimal Amount { get; set; }
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
