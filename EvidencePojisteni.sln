@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidencePojisteni.API", "Ev
 		{751F4EB6-22FB-4849-864E-BEDC1643A296} = {751F4EB6-22FB-4849-864E-BEDC1643A296}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidencePojisteniDto", "EvidencePojisteniDto\EvidencePojisteniDto.csproj", "{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{256FED51-6136-47CA-993A-82F3F6F3CE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{256FED51-6136-47CA-993A-82F3F6F3CE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{256FED51-6136-47CA-993A-82F3F6F3CE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
