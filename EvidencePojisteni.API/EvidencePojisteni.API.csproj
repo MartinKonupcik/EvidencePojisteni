@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EvidencePojisteniDto\EvidencePojisteniDto.csproj" />
     <ProjectReference Include="..\EvidencePojisteni\EvidencePojisteni.csproj" />
   </ItemGroup>
 

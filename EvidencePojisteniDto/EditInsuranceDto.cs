@@ -8,5 +8,8 @@ namespace EvidencePojisteniDto
 {
     public class EditInsuranceDto
     {
+        public decimal Amount { get; set; }
+        public DateTime ValidFrom { get; set; }
+        public DateTime ValidTo { get; set; }
     }
 }
