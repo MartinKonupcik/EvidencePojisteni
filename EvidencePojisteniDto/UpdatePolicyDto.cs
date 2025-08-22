@@ -8,7 +8,6 @@ namespace EvidencePojisteniDto
 {
     public class UpdatePolicyDto
     {
-        public Guid Id { get; set; }
         public PolicyType Type { get; set; }
         public string Name { get; set; }
     }

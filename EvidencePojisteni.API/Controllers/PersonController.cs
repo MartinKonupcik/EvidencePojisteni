@@ -2,94 +2,101 @@
 using EvidencePojisteniDto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EvidencePojisteni.API.Controllers
+namespace EvidencePojisteni.API.Controllers;
+
+[Route("Person")]
+[ApiController]
+public class PersonController(PersonService service) : ControllerBase
 {
-    
-    //stejne jako pojisteni napsat + pridat controller na policy + servicy + vše do Aj + api!!
-        [Route("Person")]
-        [ApiController]
-    public class PersonController(PersonService service) : ControllerBase
+    /// <summary>
+    /// Gets a specific person record by their ID.
+    /// </summary>
+    [HttpGet("{PersonId:Guid}")]
+    public async Task<ActionResult<UpdatePersonDto>> Get([FromRoute] Guid PersonId)
     {
-        /// <summary>
-        /// Gets a specific person record by their person number.
-        /// </summary>
-        /// <param name="PersonId">The person number in the registry.</param>
-        /// <returns>
-        /// The person record if found; otherwise, a 404 Not Found response.
-        /// </returns>
-        [HttpGet("{PersonId:Guid}")]
-        public async Task<ActionResult<Person>> Get([FromRoute] Guid PersonId)
-        {
-            var person = await service.Get(PersonId);
+        var person = await service.Get(PersonId);
+        if (person is null)
+            return NotFound();
 
-            return person is null ? NotFound() : Ok(person);
-        }       
-
-        /// <summary>
-        /// Gets a list of all person records.
-        /// </summary>
-        /// <returns>
-        /// An array of all person records.
-        /// </returns>
-        [HttpGet]
-        public async Task<ActionResult<ListItemContractDto[]>> GetList()
+        var dto = new UpdatePersonDto
         {
-            var allPeople = await service.GetList();
-            return Ok(allPeople);
+            FirstName = person.FirstName,
+            LastName = person.LastName,
+            Phone = person.Phone,
+            Age = person.Age
+        };
+        return Ok(dto);
+    }
+
+    /// <summary>
+    /// Gets a list of all person records.
+    /// </summary>
+    [HttpGet]
+    public async Task<ActionResult<UpdatePersonDto[]>> GetList()
+    {
+        var allPeople = await service.GetList();
+        var dtos = allPeople.Select(person => new UpdatePersonDto
+        {
+            FirstName = person.FirstName,
+            LastName = person.LastName,
+            Phone = person.Phone,
+            Age = person.Age
+        }).ToArray();
+        return Ok(dtos);
+    }
+
+    /// <summary>
+    /// Creates a new person record.
+    /// </summary>
+    [HttpPost]
+    public async Task<IActionResult> New([FromBody] EditPersonDto personDto)
+    {
+        var person = new Person
+        {
+            PersonId = Guid.NewGuid(),
+            FirstName = personDto.FirstName,
+            LastName = personDto.LastName,
+            Phone = personDto.Phone,
+            Age = personDto.Age
+        };
+
+        await service.Create(person);
+        return CreatedAtAction(nameof(Get), new { PersonId = person.PersonId }, null);
+    }
+
+    /// <summary>
+    /// Deletes a person record by their ID.
+    /// </summary>
+    [HttpDelete("{PersonId:Guid}")]
+    public Task<ActionResult> Delete([FromRoute] Guid PersonId)
+    {
+        var result = service.Delete(PersonId);
+
+        if (result == "Deleted")
+        {
+            return Task.FromResult<ActionResult>(Ok());
         }
+        return Task.FromResult<ActionResult>(NotFound());
+    }
 
-        /// <summary>
-        /// Creates a new person record.
-        /// </summary>
-        /// <param name="person">The person object to create.</param>
-        [HttpPost]
-        public async Task<IActionResult> New([FromBody] EditPersonDto personDto)
+    /// <summary>
+    /// Updates a person record by their ID.
+    /// </summary>
+    [HttpPut("{PersonId:Guid}")]
+    public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] UpdatePersonDto personDto)
+    {
+        var existingPerson = await service.Get(personId);
+        if (existingPerson is null)
         {
-            var person = new Person
-            {
-                PersonId = Guid.NewGuid(),
-                FirstName = personDto.FirstName,
-                LastName = personDto.LastName,
-                Phone = personDto.Phone,
-                Age = personDto.Age
-            };
-
-            await service.Create(person);
-            return Ok();
-        }
-
-        /// <summary>
-        /// Deletes a person record by their person number.
-        /// </summary>
-        /// <param name="PersonId">The person number of the record to delete.</param>
-        /// <returns>
-        /// 200 OK if deleted; otherwise, 404 Not Found.
-        /// </returns>
-        [HttpDelete("{PersonId:Guid}")]
-        public async Task<ActionResult> Delete([FromRoute] Guid PersonId)
-        {
-            var result = service.Delete(PersonId);
-
-            if (result == "Deleted")
-            {
-                return Ok();
-            }
             return NotFound();
         }
-        [HttpPut("{PersonId:Guid}")]
-        public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] UpdatePersonDto persondto)
-        {
-            if (personId != persondto.PersonId)
-            {
-                return BadRequest("Person ID mismatch.");
-            }
-            var existingPerson = await service.Get(personId);
-            if (existingPerson  is null)
-            {
-                return NotFound();
-            }
-            await service.Update(persondto);
-            return NoContent();
-        }
+
+        existingPerson.FirstName = personDto.FirstName;
+        existingPerson.LastName = personDto.LastName;
+        existingPerson.Phone = personDto.Phone;
+        existingPerson.Age = personDto.Age;
+
+        await service.Update(personId, existingPerson);
+        return NoContent();
     }
 }

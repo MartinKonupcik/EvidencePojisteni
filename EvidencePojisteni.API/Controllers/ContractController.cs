@@ -1,6 +1,5 @@
 ﻿using EvidencePojisteni.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using EvidencePojisteni.API;
 using EvidencePojisteniDto;
 
 namespace EvidencePojisteni.API.Controllers;
@@ -28,9 +27,6 @@ public class ContractController(ContractService service) : ControllerBase
 
         var dto = new ListItemContractDto
         {
-            ContractId = contract.ContractId,
-            PersonId = contract.PersonId,
-            PolicyId = contract.PolicyId,
             ValidFrom = contract.ValidFrom,
             ValidTo = contract.ValidTo,
             Amount = contract.Amount,
@@ -51,9 +47,6 @@ public class ContractController(ContractService service) : ControllerBase
         var allContracts = await service.GetList();
         var dtos = allContracts.Select(contract => new ListItemContractDto
         {
-            ContractId = contract.ContractId,
-            PersonId = contract.PersonId,
-            PolicyId = contract.PolicyId,
             ValidFrom = contract.ValidFrom,
             ValidTo = contract.ValidTo,
             Amount = contract.Amount,
@@ -72,11 +65,9 @@ public class ContractController(ContractService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> New([FromBody] EditContractDto contractDto)
     {
-        var contract = new Contract
+            var contract = new Contract
         {
-            ContractId = contractDto.ContractId == Guid.Empty ? Guid.NewGuid() : contractDto.ContractId,
-            PersonId = contractDto.PersonId,
-            PolicyId = contractDto.PolicyId,
+            ContractId = Guid.NewGuid(),
             ValidFrom = contractDto.ValidFrom,
             ValidTo = contractDto.ValidTo,
             Amount = contractDto.Amount,
@@ -113,14 +104,11 @@ public class ContractController(ContractService service) : ControllerBase
     [HttpPut("{ContractId:Guid}")]
     public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] UpdateContractDto contractDto)
     {
-        if (ContractId != contractDto.ContractId)
-            return BadRequest("Contract ID mismatch.");
-
+        
         var contract = new Contract
         {
-            ContractId = contractDto.ContractId,
-            PersonId = contractDto.PersonId,
-            PolicyId = contractDto.PolicyId,
+            ContractId = ContractId,
+ 
             ValidFrom = contractDto.ValidFrom,
             ValidTo = contractDto.ValidTo,
             Amount = contractDto.Amount,
