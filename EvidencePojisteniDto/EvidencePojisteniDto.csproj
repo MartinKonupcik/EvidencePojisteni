@@ -44,10 +44,10 @@
     <Compile Include="EditContractDto.cs" />
     <Compile Include="EditPersonDto.cs" />
     <Compile Include="EditPolicyDto.cs" />
-    <Compile Include="ItemListDto.cs" />
     <Compile Include="ListItemContractDto.cs" />
     <Compile Include="ListItemPersonDto.cs" />
     <Compile Include="ListItemPolicyDto.cs" />
+    <Compile Include="PolicyType.cs" />
     <Compile Include="UpdateContractDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdatePersonDto.cs" />

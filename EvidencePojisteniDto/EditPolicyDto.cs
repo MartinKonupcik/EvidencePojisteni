@@ -8,14 +8,8 @@ namespace EvidencePojisteniDto
 {
     public class EditPolicyDto
     {
-        public enum Type
-        {
-            Life,
-            Health,
-            Property,
-            Vehicle,
-            Travel
-        }
+        public Guid Id { get; set; }
+        public PolicyType.Type Type { get; set; }
         public string Name { get; set; }
     }
 }
