@@ -1,4 +1,5 @@
 ﻿using EvidencePojisteni.API.Services;
+using EvidencePojisteniDto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers
@@ -29,7 +30,7 @@ namespace EvidencePojisteni.API.Controllers
         /// An array of all policy records.
         /// </returns>
         [HttpGet]
-        public async Task<ActionResult<Policy[]>> GetList()
+        public async Task<ActionResult<ListItemPolicyDto[]>> GetList()
         {
             var allPolicies = await service.GetList();
             return Ok(allPolicies);
@@ -40,9 +41,16 @@ namespace EvidencePojisteni.API.Controllers
         /// </summary>
         /// <param name="policy">The policy object to create.</param>
         [HttpPost]
-        public async Task New([FromBody] Policy policy)
+        public async Task<IActionResult> New([FromBody] EditPolicyDto policyDto)
         {
+            var policy = new Policy
+            {
+                Id = policyDto.Id == Guid.Empty ? Guid.NewGuid() : policyDto.Id,
+                Name = policyDto.Name,
+                Type = policyDto.Type
+            };
             await service.Create(policy);
+            return Ok();
         }
 
         /// <summary>
@@ -72,18 +80,18 @@ namespace EvidencePojisteni.API.Controllers
         /// 204 No Content if updated; otherwise, 404 Not Found.
         /// </returns>
         [HttpPut("{PolicyId:Guid}")]
-        public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] Policy policy)
+        public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] UpdatePolicyDto policyDto)
         {
-            if (PolicyId != policy.Id)
+            var policy = new Policy
             {
-                return BadRequest("Policy ID mismatch.");
-            }
-            var updated = await service.Update(PolicyId, policy);
-            if (!updated)
-            {
-                return NotFound();
-            }
-            return NoContent();
+                Id = PolicyId,
+                Name = policyDto.Name,
+                Type = policyDto.Type
+            };
+
+            await service.Update(PolicyId, policy);
+
+            return NoContent(); // 204
         }
     }
 }

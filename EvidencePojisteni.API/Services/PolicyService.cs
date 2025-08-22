@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EvidencePojisteniDto;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Contracts;
 
 namespace EvidencePojisteni.API.Services

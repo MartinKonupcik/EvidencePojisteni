@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace EvidencePojisteniDto
 {
-    public class PolicyType
+    public enum PolicyType
     {
-        public enum Type
-        {
-            Life,
-            Health,
-            Property,
-            Vehicle,
-            Travel
-        }
+        Life,
+        Car,
+        Health,
+        House,
+        Travel,
+        Pet,
+        Business
     }
 }
+
