@@ -1,4 +1,5 @@
 ﻿using EvidencePojisteni.API.Services;
+using EvidencePojisteniDto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers
@@ -31,7 +32,7 @@ namespace EvidencePojisteni.API.Controllers
         /// An array of all person records.
         /// </returns>
         [HttpGet]
-        public async Task<ActionResult<Person[]>> GetList()
+        public async Task<ActionResult<ListItemContractDto[]>> GetList()
         {
             var allPeople = await service.GetList();
             return Ok(allPeople);

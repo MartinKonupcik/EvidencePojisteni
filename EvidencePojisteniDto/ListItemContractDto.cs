@@ -8,6 +8,7 @@ namespace EvidencePojisteniDto
 {
     public class ListItemContractDto
     {
+        public Guid PolicyId { get; set; }
         public Guid ContractId { get; set; }
         public Guid PersonId { get; set; }
         public DateTime ValidFrom { get; set; }
