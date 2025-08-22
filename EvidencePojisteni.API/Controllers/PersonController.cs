@@ -43,9 +43,19 @@ namespace EvidencePojisteni.API.Controllers
         /// </summary>
         /// <param name="person">The person object to create.</param>
         [HttpPost]
-        public async Task New([FromBody] Person person)
+        public async Task<IActionResult> New([FromBody] EditPersonDto personDto)
         {
+            var person = new Person
+            {
+                PersonId = Guid.NewGuid(),
+                FirstName = personDto.FirstName,
+                LastName = personDto.LastName,
+                Phone = personDto.Phone,
+                Age = personDto.Age
+            };
+
             await service.Create(person);
+            return Ok();
         }
 
         /// <summary>
@@ -67,9 +77,9 @@ namespace EvidencePojisteni.API.Controllers
             return NotFound();
         }
         [HttpPut("{PersonId:Guid}")]
-        public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] Person person)
+        public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] UpdatePersonDto persondto)
         {
-            if (personId != person.PersonId)
+            if (personId != persondto.PersonId)
             {
                 return BadRequest("Person ID mismatch.");
             }
@@ -78,7 +88,7 @@ namespace EvidencePojisteni.API.Controllers
             {
                 return NotFound();
             }
-            await service.Update(person);
+            await service.Update(persondto);
             return NoContent();
         }
     }
