@@ -71,7 +71,7 @@ public class PolicyController(PolicyService service) : ControllerBase
         {
             return Ok();    
         }
-       
+
         return NotFound();
     }
 

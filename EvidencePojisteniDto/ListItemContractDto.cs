@@ -8,6 +8,8 @@ namespace EvidencePojisteniDto
 {
     public class ListItemContractDto
     {
+        public Guid ContractId { get; set; }
+
         public DateTime ValidFrom { get; set; }
         public DateTime ValidTo { get; set; }
         public decimal Amount { get; set; }

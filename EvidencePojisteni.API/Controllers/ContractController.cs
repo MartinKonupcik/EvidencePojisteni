@@ -65,7 +65,7 @@ public class ContractController(ContractService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> New([FromBody] EditContractDto contractDto)
     {
-            var contract = new Contract
+            var contract = new EditContractDto
         {
             ContractId = Guid.NewGuid(),
             ValidFrom = contractDto.ValidFrom,
