@@ -35,7 +35,7 @@ public class ContractService
         return [.. _contract];
     }
 
-    public async Task Create(EditContractDto contractDto)
+    public async Task Create(NewContractDto contractDto)
     {
         var contract = new ListItemContractDto
         {
@@ -60,7 +60,7 @@ public class ContractService
         return "Deleted";
     }
 
-    public async Task<bool> Update(Guid contractId, UpdateContractDto contractDto)
+    public async Task<bool> Update(Guid contractId, DetailContractDto contractDto)
     {
         var contract = _contract.FirstOrDefault(c => c.ContractId == contractId);
         if (contract == null)

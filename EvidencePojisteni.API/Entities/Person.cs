@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 
 
-namespace EvidencePojisteni;
+namespace EvidencePojisteni.API.Entities;
 
-public class Person
+public class Person: Entity
 {
-    [Key]
-    public Guid PersonId { get; set; } 
     public string FirstName { get; set; }= null!;
     public string LastName { get; set; }= null!;
     public string Phone { get; set; }= null!;

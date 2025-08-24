@@ -49,7 +49,7 @@ public class PersonController(PersonService service) : ControllerBase
     /// Creates a new person record.
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] EditPersonDto personDto)
+    public async Task<IActionResult> New([FromBody] NewPersonDto personDto)
     {
         var person = new Person
         {

@@ -63,9 +63,9 @@ public class ContractController(ContractService service) : ControllerBase
     /// 201 Created if successful; otherwise, 400 Bad Request.
     /// </returns>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] EditContractDto contractDto)
+    public async Task<IActionResult> New([FromBody] NewContractDto contractDto)
     {
-            var contract = new EditContractDto
+            var contract = new NewContractDto
         {
             ContractId = Guid.NewGuid(),
             ValidFrom = contractDto.ValidFrom,
@@ -89,7 +89,9 @@ public class ContractController(ContractService service) : ControllerBase
     {
         var result = await service.Delete(ContractId);
         if (result == "Deleted")
+        {
             return Ok();
+        }
         return NotFound();
     }
 
@@ -102,12 +104,12 @@ public class ContractController(ContractService service) : ControllerBase
     /// 204 No Content if successful; otherwise, 400 Bad Request or 404 Not Found.
     /// </returns>
     [HttpPut("{ContractId:Guid}")]
-    public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] UpdateContractDto contractDto)
+    public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] DetailContractDto contractDto)
     {
         
         var contract = new Contract
         {
-            ContractId = ContractId,
+            Id = ContractId,
  
             ValidFrom = contractDto.ValidFrom,
             ValidTo = contractDto.ValidTo,
@@ -115,7 +117,7 @@ public class ContractController(ContractService service) : ControllerBase
             Active = contractDto.Active
         };
 
-        var updated = await service.Update(contract);
+        var updated = await service.Update(ContractId,contractDto);
         if (!updated)
             return NotFound();
 

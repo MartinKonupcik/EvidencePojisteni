@@ -41,17 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditContractDto.cs" />
-    <Compile Include="EditPersonDto.cs" />
-    <Compile Include="EditPolicyDto.cs" />
     <Compile Include="ListItemContractDto.cs" />
     <Compile Include="ListItemPersonDto.cs" />
     <Compile Include="ListItemPolicyDto.cs" />
     <Compile Include="PolicyType.cs" />
-    <Compile Include="UpdateContractDto.cs" />
+    <Compile Include="DetailContractDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UpdatePersonDto.cs" />
-    <Compile Include="UpdatePolicyDto.cs" />
+    <Compile Include="DetailPersonDto.cs" />
+    <Compile Include="DetailPolicyDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
