@@ -2,7 +2,7 @@
 
 namespace EvidencePojisteniDto
 {
-    public class UpdatePersonDto
+    public class DetailPersonDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

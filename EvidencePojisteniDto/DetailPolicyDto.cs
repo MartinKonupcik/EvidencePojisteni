@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvidencePojisteniDto
 {
-    public class UpdatePolicyDto
+    public class DetailPolicyDto
     {
         public PolicyType Type { get; set; }
         public string Name { get; set; }

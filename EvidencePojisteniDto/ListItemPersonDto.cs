@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EvidencePojisteniDto
 {
     public class ListItemPersonDto
     {
-      
-        public string FirstName { get; set; } 
+        public Guid ContractId { get; set; }
+        public Guid PolicyId { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-
     }
 }

@@ -44,10 +44,4 @@ public class Contract : Entity
         PolicyId = PolicyId,
         Active = Active
     };
-
-
-
-
-
-
 }
