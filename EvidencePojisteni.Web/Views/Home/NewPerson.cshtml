@@ -1,38 +1,30 @@
-﻿@model EvidencePojisteni.Person
+﻿@model EvidencePojisteniDto.DetailPersonDto
 
 @{
     ViewData["Title"] = "New Person";
 }
 
 <h2>New Person</h2>
-<form action="/Persons/Create" method="post">
-    <div>
-        <label for="FirstName">First Name</label>
-        <input type="text" id="FirstName" name="FirstName" class="" placeholder="John" />
+<form asp-action="Create" asp-controller="Person" method="post">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="John" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
-    <div>
-        <label for="LastName">Last Name</label>
-        <input type="text" id="LastName" name="LastName" class="" placeholder="Smith" />
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" placeholder="Smith" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
-    <div>
-        <label for="Email">Email</label>
-        <input type="email" id="Email" name="Email" class="" placeholder="johnsmith88@email.com" />
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" placeholder="731 584 972" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
-    <div>
-        <label for="Phone">Phone</label>
-        <input type="text" id="Phone" name="Phone" class="" placeholder="731 584 972" />
-    </div>
-    <div>
-        <label for="Street">Street and Number</label>
-        <input type="text" id="Street" name="Street" class="" placeholder="Main St 3" />
-    </div>
-    <div>
-        <label for="City">City</label>
-        <input type="text" id="City" name="City" class="" placeholder="Prague 1" />
-    </div>
-    <div>
-        <label for="ZipCode">ZIP Code</label>
-        <input type="text" id="ZipCode" name="ZipCode" class="" placeholder="100 00" />
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input asp-for="Age" type="number" class="form-control" placeholder="30" />
+        <span asp-validation-for="Age" class="text-danger"></span>
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Save</button>
