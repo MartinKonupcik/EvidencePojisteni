@@ -16,11 +16,10 @@ public class PersonController(PersonService service) : ControllerBase
     {
         var person = await service.Get(PersonId);
         if (person is null)
+        {
             return NotFound();
-
-       
-        var dto = person.GetListItem();
-        return Ok(dto);
+        }
+        return Ok(person);
     }
 
     /// <summary>
@@ -29,9 +28,7 @@ public class PersonController(PersonService service) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<ListItemPersonDto[]>> GetList()
     {
-        var allPeople = await service.GetList();
-        // Service should provide the DTOs
-        var dtos = allPeople.Select(p => p.GetListItem()).ToArray();
+        var dtos = await service.GetList();
         return Ok(dtos);
     }
 
@@ -41,8 +38,8 @@ public class PersonController(PersonService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> New([FromBody] DetailPersonDto personDto)
     {
-        var personId = await service.Create(personDto);
-        return CreatedAtAction(nameof(Get), new { PersonId = personId }, null);
+        await service.Create(personDto);
+        return CreatedAtAction(nameof(Get), new { PersonId = personDto.PersonId }, null);
     }
 
     /// <summary>
@@ -51,9 +48,11 @@ public class PersonController(PersonService service) : ControllerBase
     [HttpDelete("{PersonId:Guid}")]
     public async Task<ActionResult> Delete([FromRoute] Guid PersonId)
     {
-        var deleted = await service.Delete(PersonId);
-        if (deleted)
+        var result = await Task.Run(() => service.Delete(PersonId));
+        if (result == "Deleted")
+        {
             return Ok();
+        }
         return NotFound();
     }
 
@@ -63,9 +62,7 @@ public class PersonController(PersonService service) : ControllerBase
     [HttpPut("{PersonId:Guid}")]
     public async Task<ActionResult> Update([FromRoute] Guid PersonId, [FromBody] DetailPersonDto personDto)
     {
-        var updated = await service.Update(PersonId, personDto);
-        if (!updated)
-            return NotFound();
-        return NoContent();
+        var updateResult = await service.Update(PersonId, personDto);
+        return updateResult;
     }
 }

@@ -14,17 +14,11 @@ public class PolicyController(PolicyService service) : ControllerBase
     [HttpGet("{PolicyId:Guid}")]
     public async Task<ActionResult<ListItemPolicyDto>> Get([FromRoute] Guid PolicyId)
     {
-        var policy = await service.Get(PolicyId);
-
-        if (policy is null)
-            return NotFound();
-
-        var dto = new ListItemPolicyDto
+        var dto = await service.Get(PolicyId);
+        if (dto is null)
         {
-            Name = policy.Name,
-            Type = policy.Type
-        };
-
+            return NotFound();
+        }
         return Ok(dto);
     }
 
@@ -34,12 +28,7 @@ public class PolicyController(PolicyService service) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<ListItemPolicyDto[]>> GetList()
     {
-        var allPolicies = await service.GetList();
-        var dtos = allPolicies.Select(policy => new ListItemPolicyDto
-        {
-            Name = policy.Name,
-            Type = policy.Type
-        }).ToArray();
+        var dtos = await service.GetListItems();
         return Ok(dtos);
     }
 
@@ -47,16 +36,11 @@ public class PolicyController(PolicyService service) : ControllerBase
     /// Creates a new policy record.
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] EditPolicyDto policyDto)
+    public async Task<IActionResult> New([FromBody] DetailPolicyDto policyDto)
     {
-        var policy = new Policy
-        {
-            Id = Guid.NewGuid(), 
-            Name = policyDto.Name,
-            Type = policyDto.Type
-        };
-        await service.Create(policy);
-        return CreatedAtAction(nameof(Get), new { PolicyId = policy.Id }, null);
+        await service.Create(policyDto);
+        return CreatedAtAction(nameof(Get), new { PolicyId = policyDto.PolicyId }, null);
+
     }
 
     /// <summary>
@@ -65,13 +49,11 @@ public class PolicyController(PolicyService service) : ControllerBase
     [HttpDelete("{PolicyId:Guid}")]
     public async Task<ActionResult> Delete([FromRoute] Guid PolicyId)
     {
-        var result = await service.Delete(PolicyId);
-
-        if (result == "Deleted")
+        var deleted = await service.Delete(PolicyId);
+        if (deleted)
         {
-            return Ok();    
+            return Ok();
         }
-
         return NotFound();
     }
 
@@ -79,20 +61,11 @@ public class PolicyController(PolicyService service) : ControllerBase
     /// Updates an existing policy record.
     /// </summary>
     [HttpPut("{PolicyId:Guid}")]
-    public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] UpdatePolicyDto policyDto)
+    public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] DetailPolicyDto policyDto)
     {
-        var policy = new Policy
-        {
-            Id = PolicyId,
-            Name = policyDto.Name,
-            Type = policyDto.Type
-        };
-
-        var updated = await service.Update(PolicyId, policy);
-
+        var updated = await service.Update(PolicyId, policyDto);
         if (!updated)
             return NotFound();
-
         return NoContent();
     }
 }
