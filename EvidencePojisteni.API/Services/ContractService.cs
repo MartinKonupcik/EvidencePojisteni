@@ -8,17 +8,16 @@ public class ContractService
     [
         new()
         {
-            ContractId= Guid.NewGuid(),
-            ValidFrom = DateTime.Now.AddYears(-1),
-            ValidTo = DateTime.Now.AddYears(5),
-            Amount = 1000000,
+            Id= Guid.NewGuid(),
+           PersonId= Guid.NewGuid(),
+              PolicyId= Guid.NewGuid(),
             Active = true
         },
         new()
         {
-            ValidFrom = DateTime.Now.AddYears(-1),
-            ValidTo = DateTime.Now.AddYears(7),
-            Amount = 500000,
+            Id= Guid.NewGuid(),
+            PersonId= Guid.NewGuid(),
+            PolicyId= Guid.NewGuid(),
             Active = true
         }
     ];
@@ -26,7 +25,7 @@ public class ContractService
     public async Task<ListItemContractDto?> Get(Guid contractId)
     {
         await Task.Delay(100).ConfigureAwait(false);
-        return _contract.FirstOrDefault(c => c.ContractId == contractId);
+        return _contract.FirstOrDefault(c => c.Id == contractId);
     }
 
     public async Task<ListItemContractDto[]> GetList()
@@ -35,14 +34,12 @@ public class ContractService
         return [.. _contract];
     }
 
-    public async Task Create(NewContractDto contractDto)
+    public async Task Create(DetailContractDto contractDto)
     {
         var contract = new ListItemContractDto
         {
-            ContractId = Guid.NewGuid(),
-            ValidFrom = contractDto.ValidFrom,
-            ValidTo = contractDto.ValidTo,
-            Amount = contractDto.Amount,
+            PolicyId = contractDto.PolicyId,
+            PersonId = contractDto.PersonId,
             Active = contractDto.Active
         };
         _contract.Add(contract);
@@ -51,7 +48,7 @@ public class ContractService
 
     public async Task<string> Delete(Guid contractId)
     {
-        var contract = _contract.FirstOrDefault(c => c.ContractId == contractId);
+        var contract = _contract.FirstOrDefault(c => c.Id == contractId);
         if (contract == null)
         {
             return "NotFound";

@@ -1,6 +1,6 @@
 ﻿using EvidencePojisteni.API.Services;
-using Microsoft.AspNetCore.Mvc;
 using EvidencePojisteniDto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers;
 
@@ -24,15 +24,7 @@ public class ContractController(ContractService service) : ControllerBase
         var contract = await service.Get(ContractId);
         if (contract is null)
             return NotFound();
-
-        var dto = new ListItemContractDto
-        {
-            ValidFrom = contract.ValidFrom,
-            ValidTo = contract.ValidTo,
-            Amount = contract.Amount,
-            Active = contract.Active
-        };
-        return Ok(dto);
+        return Ok(contract);
     }
 
     /// <summary>
@@ -45,14 +37,7 @@ public class ContractController(ContractService service) : ControllerBase
     public async Task<ActionResult<ListItemContractDto[]>> GetList()
     {
         var allContracts = await service.GetList();
-        var dtos = allContracts.Select(contract => new ListItemContractDto
-        {
-            ValidFrom = contract.ValidFrom,
-            ValidTo = contract.ValidTo,
-            Amount = contract.Amount,
-            Active = contract.Active
-        }).ToArray();
-        return Ok(dtos);
+        return Ok(allContracts);
     }
 
     /// <summary>
@@ -63,18 +48,13 @@ public class ContractController(ContractService service) : ControllerBase
     /// 201 Created if successful; otherwise, 400 Bad Request.
     /// </returns>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] NewContractDto contractDto)
+    public async Task<IActionResult> New([FromBody] DetailContractDto contractDto)
     {
-            var contract = new NewContractDto
-        {
-            ContractId = Guid.NewGuid(),
-            ValidFrom = contractDto.ValidFrom,
-            ValidTo = contractDto.ValidTo,
-            Amount = contractDto.Amount,
-            Active = contractDto.Active
-        };
-        await service.Create(contract);
-        return Ok();
+        if (contractDto is null)
+            return BadRequest("Contract data is required.");
+
+        await service.Create(contractDto);
+        return StatusCode(201);
     }
 
     /// <summary>
@@ -106,21 +86,11 @@ public class ContractController(ContractService service) : ControllerBase
     [HttpPut("{ContractId:Guid}")]
     public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] DetailContractDto contractDto)
     {
-        
-        var contract = new Contract
-        {
-            Id = ContractId,
- 
-            ValidFrom = contractDto.ValidFrom,
-            ValidTo = contractDto.ValidTo,
-            Amount = contractDto.Amount,
-            Active = contractDto.Active
-        };
-
-        var updated = await service.Update(ContractId,contractDto);
+        var updated = await service.Update(ContractId, contractDto);
         if (!updated)
+        {
             return NotFound();
-
+        }
         return NoContent();
     }
 }
