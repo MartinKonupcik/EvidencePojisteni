@@ -12,19 +12,14 @@ public class PersonController(PersonService service) : ControllerBase
     /// Gets a specific person record by their ID.
     /// </summary>
     [HttpGet("{PersonId:Guid}")]
-    public async Task<ActionResult<UpdatePersonDto>> Get([FromRoute] Guid PersonId)
+    public async Task<ActionResult<ListItemPersonDto>> Get([FromRoute] Guid PersonId)
     {
         var person = await service.Get(PersonId);
         if (person is null)
             return NotFound();
 
-        var dto = new UpdatePersonDto
-        {
-            FirstName = person.FirstName,
-            LastName = person.LastName,
-            Phone = person.Phone,
-            Age = person.Age
-        };
+       
+        var dto = person.GetListItem();
         return Ok(dto);
     }
 
@@ -32,16 +27,11 @@ public class PersonController(PersonService service) : ControllerBase
     /// Gets a list of all person records.
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult<UpdatePersonDto[]>> GetList()
+    public async Task<ActionResult<ListItemPersonDto[]>> GetList()
     {
         var allPeople = await service.GetList();
-        var dtos = allPeople.Select(person => new UpdatePersonDto
-        {
-            FirstName = person.FirstName,
-            LastName = person.LastName,
-            Phone = person.Phone,
-            Age = person.Age
-        }).ToArray();
+        // Service should provide the DTOs
+        var dtos = allPeople.Select(p => p.GetListItem()).ToArray();
         return Ok(dtos);
     }
 
@@ -49,54 +39,33 @@ public class PersonController(PersonService service) : ControllerBase
     /// Creates a new person record.
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] NewPersonDto personDto)
+    public async Task<IActionResult> New([FromBody] DetailPersonDto personDto)
     {
-        var person = new Person
-        {
-            PersonId = Guid.NewGuid(),
-            FirstName = personDto.FirstName,
-            LastName = personDto.LastName,
-            Phone = personDto.Phone,
-            Age = personDto.Age
-        };
-
-        await service.Create(person);
-        return CreatedAtAction(nameof(Get), new { PersonId = person.PersonId }, null);
+        var personId = await service.Create(personDto);
+        return CreatedAtAction(nameof(Get), new { PersonId = personId }, null);
     }
 
     /// <summary>
     /// Deletes a person record by their ID.
     /// </summary>
     [HttpDelete("{PersonId:Guid}")]
-    public Task<ActionResult> Delete([FromRoute] Guid PersonId)
+    public async Task<ActionResult> Delete([FromRoute] Guid PersonId)
     {
-        var result = service.Delete(PersonId);
-
-        if (result == "Deleted")
-        {
-            return Task.FromResult<ActionResult>(Ok());
-        }
-        return Task.FromResult<ActionResult>(NotFound());
+        var deleted = await service.Delete(PersonId);
+        if (deleted)
+            return Ok();
+        return NotFound();
     }
 
     /// <summary>
     /// Updates a person record by their ID.
     /// </summary>
     [HttpPut("{PersonId:Guid}")]
-    public async Task<ActionResult> Update([FromRoute] Guid personId, [FromBody] UpdatePersonDto personDto)
+    public async Task<ActionResult> Update([FromRoute] Guid PersonId, [FromBody] DetailPersonDto personDto)
     {
-        var existingPerson = await service.Get(personId);
-        if (existingPerson is null)
-        {
+        var updated = await service.Update(PersonId, personDto);
+        if (!updated)
             return NotFound();
-        }
-
-        existingPerson.FirstName = personDto.FirstName;
-        existingPerson.LastName = personDto.LastName;
-        existingPerson.Phone = personDto.Phone;
-        existingPerson.Age = personDto.Age;
-
-        await service.Update(personId, existingPerson);
         return NoContent();
     }
 }

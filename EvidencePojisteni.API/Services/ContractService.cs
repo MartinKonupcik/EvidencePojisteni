@@ -59,14 +59,17 @@ public class ContractService
 
     public async Task<bool> Update(Guid contractId, DetailContractDto contractDto)
     {
-        var contract = _contract.FirstOrDefault(c => c.ContractId == contractId);
+        var contract = _contract.FirstOrDefault(c => c.Id == contractId);
         if (contract == null)
         {
             return false;
         }
-        contract.ValidFrom = contractDto.ValidFrom;
-        contract.ValidTo = contractDto.ValidTo;
-        contract.Amount = contractDto.Amount;
+        contractDto.PolicyId = contractDto.PolicyId;
+        contractDto.PersonId = contractDto.PersonId;
+        contractDto.ValidFrom= contractDto.ValidFrom;
+        contractDto.ValidTo= contractDto.ValidTo;
+        contractDto.Amount= contractDto.Amount;
+        contractDto.PolicyType= contractDto.PolicyType;
         contract.Active = contractDto.Active;
         await Task.Delay(100).ConfigureAwait(false);
         return true;

@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using EvidencePojisteniDto;
 namespace EvidencePojisteni.API.Services
 {
     public class PersonService
     {
-        private List<Person> _person = new()
+        private List<ListItemPersonDto> _person = new()
         {
            
         };
 
-      public async Task<Person?> Get(Guid personId)
+      public async Task<ListItemPersonDto?> Get(Guid personId)
         {
             // Simulate async operation
             await Task.Delay(100).ConfigureAwait(false);
@@ -17,23 +17,31 @@ namespace EvidencePojisteni.API.Services
             return _person.SingleOrDefault(p => p.PersonId == personId);
         }
 
-        public async Task<Person[]> GetList()
+        public async Task<ListItemPersonDto[]> GetList()
         {
             // Simulate async operation
             await Task.Delay(100).ConfigureAwait(false);
 
-            return [.. _person];
+            return _person.ToArray();
         }
 
-        public async Task Create(Person person)
+        public async Task Create(DetailPersonDto person)
         {
-            // Assign a new Guid if not already set
+            
             if (person.PersonId == Guid.Empty)
             {
                 person.PersonId = Guid.NewGuid();
             }
 
-            _person.Add(person);
+            var listItem = new ListItemPersonDto
+            {
+                PersonId = person.PersonId,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                ContractId = Guid.Empty,
+                PolicyId = Guid.Empty
+            };
+            _person.Add(listItem);
 
             // Simulate async operation
             await Task.Delay(100).ConfigureAwait(false);
@@ -49,16 +57,21 @@ namespace EvidencePojisteni.API.Services
             _ = _person.Remove(toDelete.Single());
             return "Deleted";
         }
-        public async Task<ActionResult> Update(Guid personId, Person person)
+        public async Task<ActionResult> Update(Guid personId, DetailPersonDto person)
         {
             var existingPerson = await Get(personId);
             if (existingPerson is null)
             {
                 return new NotFoundResult();
             }
-            existingPerson.FirstName = person.FirstName;
-            existingPerson.LastName = person.LastName;
-            existingPerson.Age = person.Age;
+            var update = new ListItemPersonDto
+            {
+                PersonId = personId,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                ContractId = existingPerson.ContractId,
+                PolicyId = existingPerson.PolicyId,
+            };
             // Simulate async operation
             await Task.Delay(100).ConfigureAwait(false);
             return new OkResult();
