@@ -39,7 +39,7 @@ public class PolicyController(PolicyService service) : ControllerBase
     public async Task<IActionResult> New([FromBody] DetailPolicyDto policyDto)
     {
         await service.Create(policyDto);
-        return CreatedAtAction(nameof(Get), new { PolicyId = policyDto.PolicyId }, null);
+        return CreatedAtAction(nameof(Get), new { Id = policyDto.PolicyId }, null);
 
     }
 
@@ -64,8 +64,9 @@ public class PolicyController(PolicyService service) : ControllerBase
     public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] DetailPolicyDto policyDto)
     {
         var updated = await service.Update(PolicyId, policyDto);
-        if (!updated)
+        if (!updated) { 
             return NotFound();
+        }
         return NoContent();
     }
 }
