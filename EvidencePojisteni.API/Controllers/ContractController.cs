@@ -1,5 +1,5 @@
 ﻿using EvidencePojisteni.API.Services;
-using EvidencePojisteniDto;
+using EvidencePojisteniDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers;
@@ -22,9 +22,7 @@ public class ContractController(ContractService service) : ControllerBase
     public async Task<ActionResult<ListItemContractDto>> Get([FromRoute] Guid ContractId)
     {
         var contract = await service.Get(ContractId);
-        if (contract is null)
-            return NotFound();
-        return Ok(contract);
+        return contract is null ? (ActionResult<ListItemContractDto>)NotFound() : (ActionResult<ListItemContractDto>)Ok(contract);
     }
 
     /// <summary>
@@ -51,8 +49,9 @@ public class ContractController(ContractService service) : ControllerBase
     public async Task<IActionResult> New([FromBody] DetailContractDto contractDto)
     {
         if (contractDto is null)
+        {
             return BadRequest("Contract data is required.");
-
+        }
         await service.Create(contractDto);
         return StatusCode(201);
     }
@@ -68,11 +67,7 @@ public class ContractController(ContractService service) : ControllerBase
     public async Task<ActionResult> Delete([FromRoute] Guid ContractId)
     {
         var result = await service.Delete(ContractId);
-        if (result == "Deleted")
-        {
-            return Ok();
-        }
-        return NotFound();
+        return result == "Deleted" ? Ok() : NotFound();
     }
 
     /// <summary>

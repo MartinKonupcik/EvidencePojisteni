@@ -1,16 +1,18 @@
-﻿namespace EvidencePojisteni.API.Services;
+﻿
+using EvidencePojisteni.API.Entities;
+using EvidencePojisteniDtos;
 
-using EvidencePojisteniDto;
-
+namespace EvidencePojisteni.API.Services;
 public class ContractService
 {
-    private List<ListItemContractDto> _contract =
+    private List<Contract> _contractList =
     [
         new()
         {
             Id= Guid.NewGuid(),
            PersonId= Guid.NewGuid(),
               PolicyId= Guid.NewGuid(),
+
             Active = true
         },
         new()
@@ -22,55 +24,37 @@ public class ContractService
         }
     ];
 
-    public async Task<ListItemContractDto?> Get(Guid contractId)
+    public async Task<DetailContractDto?> Get(Guid contractId)
     {
         await Task.Delay(100).ConfigureAwait(false);
-        return _contract.FirstOrDefault(c => c.Id == contractId);
+        return _contractList.FirstOrDefault(c => c.Id == contractId)?.GetDetail();
     }
 
     public async Task<ListItemContractDto[]> GetList()
     {
         await Task.Delay(100).ConfigureAwait(false);
-        return [.. _contract];
+        return _contractList.Select(static x => x.GetListItem()).ToArray();
     }
 
     public async Task Create(DetailContractDto contractDto)
     {
-        var contract = new ListItemContractDto
-        {
-            PolicyId = contractDto.PolicyId,
-            PersonId = contractDto.PersonId,
-            Active = contractDto.Active
-        };
-        _contract.Add(contract);
+        _contractList.Add(new(Guid.NewGuid(), contractDto));
         await Task.Delay(100).ConfigureAwait(false);
     }
 
     public async Task<string> Delete(Guid contractId)
     {
-        var contract = _contract.FirstOrDefault(c => c.Id == contractId);
-        if (contract == null)
+        if (_contractList.Any(c => c.Id == contractId))
         {
-            return "NotFound";
+            _ = _contractList.RemoveAll(c => c.Id == contractId);
+            return "Deleted";
         }
-        _contract.Remove(contract);
-        return "Deleted";
+        return "Not Found";
     }
 
     public async Task<bool> Update(Guid contractId, DetailContractDto contractDto)
     {
-        var contract = _contract.FirstOrDefault(c => c.Id == contractId);
-        if (contract == null)
-        {
-            return false;
-        }
-        contractDto.PolicyId = contractDto.PolicyId;
-        contractDto.PersonId = contractDto.PersonId;
-        contractDto.ValidFrom= contractDto.ValidFrom;
-        contractDto.ValidTo= contractDto.ValidTo;
-        contractDto.Amount= contractDto.Amount;
-        contractDto.PolicyType= contractDto.PolicyType;
-        contract.Active = contractDto.Active;
+        _contractList.FirstOrDefault(c => c.Id == contractId)?.Update(contractDto);
         await Task.Delay(100).ConfigureAwait(false);
         return true;
     }

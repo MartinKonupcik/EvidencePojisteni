@@ -1,5 +1,4 @@
-﻿using EvidencePojisteni.API.Entities;
-using EvidencePojisteniDto;
+﻿using EvidencePojisteniDtos;
 
 namespace EvidencePojisteni.API.Entities;
 
@@ -37,11 +36,22 @@ public class Contract : Entity
         Active = Dto.Active;
     }
 
-    public ListItemContractDto GetListItem()=> new ListItemContractDto
+    public ListItemContractDto GetListItem() => new()
     {
         Id = Id,
         PersonId = PersonId,
         PolicyId = PolicyId,
+        Active = Active
+    };
+
+    public DetailContractDto GetDetail() => new()
+    {
+        PersonId = PersonId,
+        PolicyId = PolicyId,
+        PolicyType = PolicyType,
+        ValidFrom = ValidFrom,
+        ValidTo = ValidTo,
+        Amount = Amount,
         Active = Active
     };
 }

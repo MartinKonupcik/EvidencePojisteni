@@ -1,7 +1,6 @@
-﻿namespace EvidencePojisteni.API.Entities
+﻿namespace EvidencePojisteni.API.Entities;
+
+public class Entity
 {
-    public class Entity
-    {
-        public Guid Id { get; set; }        
-    }
+    public Guid Id { get; set; }
 }

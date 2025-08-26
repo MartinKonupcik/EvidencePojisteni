@@ -1,5 +1,4 @@
-﻿using EvidencePojisteniDto;
-
+﻿using EvidencePojisteniDtos;
 
 namespace EvidencePojisteni.API.Entities;
 

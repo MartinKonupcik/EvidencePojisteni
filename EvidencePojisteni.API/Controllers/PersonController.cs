@@ -1,5 +1,5 @@
 ﻿using EvidencePojisteni.API.Services;
-using EvidencePojisteniDto;
+using EvidencePojisteniDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers;

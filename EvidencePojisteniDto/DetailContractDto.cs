@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EvidencePojisteniDto
-{
+namespace EvidencePojisteniDto;
+
     public class DetailContractDto
     {
         public Guid PersonId { get; set; }
@@ -16,4 +12,4 @@ namespace EvidencePojisteniDto
         public decimal Amount { get; set; }
         public bool Active { get; set; }
     }
-}
+

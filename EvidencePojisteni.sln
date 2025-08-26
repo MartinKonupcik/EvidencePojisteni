@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidencePojisteni.Web", "Ev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidencePojisteni.API", "EvidencePojisteni.API\EvidencePojisteni.API.csproj", "{256FED51-6136-47CA-993A-82F3F6F3CE2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidencePojisteniDto", "EvidencePojisteniDto\EvidencePojisteniDto.csproj", "{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidencePojisteniDtos", "EvidencePojisteniDtos\EvidencePojisteniDtos.csproj", "{3371D9A8-8C24-4A71-B3EB-E74E718ED7DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{256FED51-6136-47CA-993A-82F3F6F3CE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{256FED51-6136-47CA-993A-82F3F6F3CE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{256FED51-6136-47CA-993A-82F3F6F3CE2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{423D9B4C-47B3-4F47-B484-DBD7DCD4CBD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3371D9A8-8C24-4A71-B3EB-E74E718ED7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3371D9A8-8C24-4A71-B3EB-E74E718ED7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3371D9A8-8C24-4A71-B3EB-E74E718ED7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3371D9A8-8C24-4A71-B3EB-E74E718ED7DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

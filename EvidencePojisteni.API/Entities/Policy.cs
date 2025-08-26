@@ -1,4 +1,4 @@
-﻿using EvidencePojisteniDto;
+﻿using EvidencePojisteniDtos;
 
 namespace EvidencePojisteni.API.Entities;
 
@@ -9,7 +9,7 @@ public class Policy : Entity
     public Guid ContractId { get; set; }
     public Guid PersonId { get; set; }
 
-public Policy() { }
+    public Policy() { }
     public Policy(Guid id, DetailPolicyDto dto)
     {
         Id = id;
