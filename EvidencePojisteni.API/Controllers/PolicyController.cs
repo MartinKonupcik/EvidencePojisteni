@@ -15,11 +15,7 @@ public class PolicyController(PolicyService service) : ControllerBase
     public async Task<ActionResult<ListItemPolicyDto>> Get([FromRoute] Guid PolicyId)
     {
         var dto = await service.Get(PolicyId);
-        if (dto is null)
-        {
-            return NotFound();
-        }
-        return Ok(dto);
+        return dto is null ? (ActionResult<ListItemPolicyDto>)NotFound() : (ActionResult<ListItemPolicyDto>)Ok(dto);
     }
 
     /// <summary>
@@ -50,11 +46,7 @@ public class PolicyController(PolicyService service) : ControllerBase
     public async Task<ActionResult> Delete([FromRoute] Guid PolicyId)
     {
         var deleted = await service.Delete(PolicyId);
-        if (deleted)
-        {
-            return Ok();
-        }
-        return NotFound();
+        return deleted ? Ok() : NotFound();
     }
 
     /// <summary>
@@ -64,9 +56,6 @@ public class PolicyController(PolicyService service) : ControllerBase
     public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] DetailPolicyDto policyDto)
     {
         var updated = await service.Update(PolicyId, policyDto);
-        if (!updated) { 
-            return NotFound();
-        }
-        return NoContent();
+        return !updated ? NotFound() : NoContent();
     }
 }

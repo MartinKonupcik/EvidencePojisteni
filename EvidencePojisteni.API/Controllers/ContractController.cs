@@ -82,10 +82,6 @@ public class ContractController(ContractService service) : ControllerBase
     public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] DetailContractDto contractDto)
     {
         var updated = await service.Update(ContractId, contractDto);
-        if (!updated)
-        {
-            return NotFound();
-        }
-        return NoContent();
+        return !updated ? NotFound() : NoContent();
     }
 }

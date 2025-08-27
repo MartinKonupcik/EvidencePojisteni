@@ -50,7 +50,7 @@ public class PolicyService
     {
         if (_policyList.Any(c => c.Id == id))
         {
-            _ = _policyList.RemoveAll(c => c.Id == id);
+           _policyList.RemoveAll(c => c.Id == id);
             return true;
         }
         return false;

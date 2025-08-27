@@ -15,11 +15,7 @@ public class PersonController(PersonService service) : ControllerBase
     public async Task<ActionResult<ListItemPersonDto>> Get([FromRoute] Guid PersonId)
     {
         var person = await service.Get(PersonId);
-        if (person is null)
-        {
-            return NotFound();
-        }
-        return Ok(person);
+        return person is null ? (ActionResult<ListItemPersonDto>)NotFound() : (ActionResult<ListItemPersonDto>)Ok(person);
     }
 
     /// <summary>
@@ -39,7 +35,7 @@ public class PersonController(PersonService service) : ControllerBase
     public async Task<IActionResult> New([FromBody] DetailPersonDto personDto)
     {
         await service.Create(personDto);
-        return CreatedAtAction(nameof(Get), new { PersonId = personDto.PersonId }, null);
+        return CreatedAtAction(nameof(Get), new { personDto.PersonId }, null);
     }
 
     /// <summary>
@@ -49,11 +45,7 @@ public class PersonController(PersonService service) : ControllerBase
     public async Task<ActionResult> Delete([FromRoute] Guid PersonId)
     {
         var result = await Task.Run(() => service.Delete(PersonId));
-        if (result == "Deleted")
-        {
-            return Ok();
-        }
-        return NotFound();
+        return result == "Deleted" ? Ok() : NotFound();
     }
 
     /// <summary>
@@ -62,7 +54,7 @@ public class PersonController(PersonService service) : ControllerBase
     [HttpPut("{PersonId:Guid}")]
     public async Task<ActionResult> Update([FromRoute] Guid PersonId, [FromBody] DetailPersonDto personDto)
     {
-        var updateResult = await service.Update(PersonId, personDto);
-        return updateResult;
+         await service.Update(PersonId, personDto);
+        return Ok();
     }
 }

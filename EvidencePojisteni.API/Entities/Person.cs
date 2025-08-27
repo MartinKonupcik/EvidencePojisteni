@@ -8,9 +8,7 @@ public class Person : Entity
     public string LastName { get; set; } = null!;
     public string Phone { get; set; } = null!;
     public int Age { get; set; }
-    public Guid ContractId { get; set; }
-    public Guid PolicyId { get; set; }
-
+    public List <Guid> ContractId { get; set; }
     public Person() { }
 
     public Person(Guid id, DetailPersonDto dto)
@@ -35,7 +33,6 @@ public class Person : Entity
         FirstName = FirstName,
         LastName = LastName,
         ContractId = ContractId,
-        PolicyId = PolicyId
     };
 
     public DetailPersonDto GetDetail() => new()

@@ -14,8 +14,7 @@ public class PersonService
             LastName = "Novák",
             Phone = "123456789",
             Age = 30,
-            ContractId = Guid.NewGuid(),
-            PolicyId = Guid.NewGuid()
+            ContractId = new List<Guid> { Guid.NewGuid() },
         },
         new()
         {
@@ -24,8 +23,7 @@ public class PersonService
             LastName = "Svoboda",
             Phone = "987654321",
             Age = 45,
-            ContractId = Guid.NewGuid(),
-            PolicyId = Guid.NewGuid()
+            ContractId = new List<Guid> { Guid.NewGuid() },
         }
 ];
         
