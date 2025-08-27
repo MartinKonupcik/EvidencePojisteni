@@ -37,4 +37,13 @@ public class Person : Entity
         ContractId = ContractId,
         PolicyId = PolicyId
     };
+
+    public DetailPersonDto GetDetail() => new()
+    {
+        PersonId = Id,
+        FirstName = FirstName,
+        LastName = LastName,
+        Phone = Phone,
+        Age = Age
+    };
 }

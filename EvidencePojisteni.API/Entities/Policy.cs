@@ -28,5 +28,11 @@ public class Policy : Entity
         Type = Type,
         Name = Name
     };
+
+    public DetailPolicyDto GetDetail() => new()
+    {
+        Type = Type,
+        Name = Name
+    };
 }
 
