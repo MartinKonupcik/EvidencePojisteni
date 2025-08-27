@@ -46,7 +46,7 @@ public class ContractController(ContractService service) : ControllerBase
     /// 201 Created if successful; otherwise, 400 Bad Request.
     /// </returns>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] DetailContractDto contractDto)
+    public async Task<IActionResult> Create ([FromBody] DetailContractDto contractDto)
     {
         if (contractDto is null)
         {

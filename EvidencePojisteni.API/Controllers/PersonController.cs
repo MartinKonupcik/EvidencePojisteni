@@ -32,7 +32,7 @@ public class PersonController(PersonService service) : ControllerBase
     /// Creates a new person record.
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] DetailPersonDto personDto)
+    public async Task<IActionResult> Create([FromBody] DetailPersonDto personDto)
     {
         await service.Create(personDto);
         return CreatedAtAction(nameof(Get), new { personDto.PersonId }, null);

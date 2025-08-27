@@ -32,7 +32,7 @@ public class PolicyController(PolicyService service) : ControllerBase
     /// Creates a new policy record.
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> New([FromBody] DetailPolicyDto policyDto)
+    public async Task<IActionResult> Create([FromBody] DetailPolicyDto policyDto)
     {
         await service.Create(policyDto);
         return CreatedAtAction(nameof(Get), new { Id = policyDto.PolicyId }, null);

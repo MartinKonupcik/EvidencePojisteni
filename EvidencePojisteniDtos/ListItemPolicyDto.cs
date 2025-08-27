@@ -7,4 +7,7 @@ public class ListItemPolicyDto
     public Guid PersonId { get; set; }
     public PolicyType Type { get; set; }
     public string Name { get; set; }
+    public int MaxAmountOfInsuredItems { get; set; }
+    public DateOnly ValidFrom { get; set; }
+    public DateOnly ValidTo { get; set; }
 }
