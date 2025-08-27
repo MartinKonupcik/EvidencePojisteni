@@ -31,6 +31,7 @@ public class Policy : Entity
 
     public DetailPolicyDto GetDetail() => new()
     {
+        PolicyId = Id,
         Type = Type,
         Name = Name
     };
