@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EvidencePojisteni.API\EvidencePojisteni.API.csproj" />
     <ProjectReference Include="..\EvidencePojisteniDtos\EvidencePojisteniDtos.csproj" />
   </ItemGroup>
 

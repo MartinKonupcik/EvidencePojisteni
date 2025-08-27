@@ -12,10 +12,10 @@ public class PersonController(PersonService service) : ControllerBase
     /// Gets a specific person record by their ID.
     /// </summary>
     [HttpGet("{PersonId:Guid}")]
-    public async Task<ActionResult<ListItemPersonDto>> Get([FromRoute] Guid PersonId)
+    public async Task<ActionResult<DetailPersonDto>> Get([FromRoute] Guid PersonId)
     {
         var person = await service.Get(PersonId);
-        return person is null ? (ActionResult<ListItemPersonDto>)NotFound() : (ActionResult<ListItemPersonDto>)Ok(person);
+        return person is null ? (ActionResult<DetailPersonDto>)NotFound() : (ActionResult<DetailPersonDto>)Ok(person);
     }
 
     /// <summary>

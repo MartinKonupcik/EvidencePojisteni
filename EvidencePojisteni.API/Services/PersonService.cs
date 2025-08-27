@@ -1,6 +1,6 @@
 ﻿using EvidencePojisteni.API.Entities;
 using EvidencePojisteniDtos;
-using Microsoft.AspNetCore.Mvc;
+
 namespace EvidencePojisteni.API.Services;
 
 public class PersonService
@@ -14,7 +14,7 @@ public class PersonService
             LastName = "Novák",
             Phone = "123456789",
             Age = 30,
-            ContractId = new List<Guid> { Guid.NewGuid() },
+            ContractId = [Guid.NewGuid()],
         },
         new()
         {
@@ -23,7 +23,7 @@ public class PersonService
             LastName = "Svoboda",
             Phone = "987654321",
             Age = 45,
-            ContractId = new List<Guid> { Guid.NewGuid() },
+            ContractId = [Guid.NewGuid()],
         }
 ];
         
