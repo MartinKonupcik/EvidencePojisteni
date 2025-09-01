@@ -36,6 +36,7 @@ public class Policy : Entity
         ValidFrom = ValidFrom,
         ValidTo = ValidTo,
         MaxAmountOfInsuredItems = MaxAmountOfInsuredItems,
+        PolicyId = Id
     };
 
     public DetailPolicyDto GetDetail() => new()

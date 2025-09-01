@@ -41,7 +41,7 @@ public class PolicyService
     {
         await Task.Delay(100).ConfigureAwait(false);
 
-        return _policyList.Select(p => p.GetListItem()).ToArray();
+        return [.. _policyList.Select(p => p.GetListItem())];
     }
 
     public async Task Create(DetailPolicyDto policyDto)

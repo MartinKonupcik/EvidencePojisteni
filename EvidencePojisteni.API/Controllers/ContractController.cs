@@ -19,10 +19,10 @@ public class ContractController(ContractService service) : ControllerBase
     /// The contract record if found; otherwise, a 404 Not Found response.
     /// </returns>
     [HttpGet("{ContractId:Guid}")]
-    public async Task<ActionResult<ListItemContractDto>> Get([FromRoute] Guid ContractId)
+    public async Task<ActionResult<DetailContractDto>> Get([FromRoute] Guid ContractId)
     {
         var contract = await service.Get(ContractId);
-        return contract is null ? (ActionResult<ListItemContractDto>)NotFound() : (ActionResult<ListItemContractDto>)Ok(contract);
+        return contract is null ? (ActionResult<DetailContractDto>)NotFound() : (ActionResult<DetailContractDto>)Ok(contract);
     }
 
     /// <summary>

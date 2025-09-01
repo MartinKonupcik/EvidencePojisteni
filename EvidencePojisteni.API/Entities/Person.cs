@@ -46,6 +46,7 @@ public class Person : Entity
         FirstName = FirstName,
         LastName = LastName,
         Phone = Phone,
-        Age = Age
+        Age = Age,
+        PolicyId = PolicyId
     };
 }
