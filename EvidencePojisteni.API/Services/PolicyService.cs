@@ -14,7 +14,9 @@ public class PolicyService
                 Type = PolicyType.Health,
                 Name = "Health care",
                 ContractId = Guid.NewGuid(),
-                PersonId = Guid.NewGuid()
+                MaxAmountOfInsuredItems = 5,
+                ValidFrom = DateOnly.FromDateTime(DateTime.Now),
+                ValidTo = DateOnly.FromDateTime(DateTime.Now.AddYears(1))
             },
             new()
             {
@@ -22,7 +24,9 @@ public class PolicyService
                 Type = PolicyType.Life,
                 Name = "Life insurance",
                 ContractId = Guid.NewGuid(),
-                PersonId = Guid.NewGuid()
+                MaxAmountOfInsuredItems = 3,
+                ValidFrom = DateOnly.FromDateTime(DateTime.Now),
+                ValidTo = DateOnly.FromDateTime(DateTime.Now.AddYears(1))
             }
         ];
  

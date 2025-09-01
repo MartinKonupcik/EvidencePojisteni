@@ -7,7 +7,6 @@ public class Policy : Entity
     public PolicyType Type { get; set; }
     public string Name { get; set; } = null!;
     public Guid ContractId { get; set; }
-    public Guid PersonId { get; set; }
     public int MaxAmountOfInsuredItems { get; set; }
     public DateOnly ValidFrom { get; set; }
     public DateOnly ValidTo { get; set; }
@@ -32,7 +31,6 @@ public class Policy : Entity
     public ListItemPolicyDto GetListItem() => new()
     {
         ContractId = ContractId,
-        PersonId = PersonId,
         Type = Type,
         Name = Name,
         ValidFrom = ValidFrom,

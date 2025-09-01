@@ -12,15 +12,22 @@ public class ContractService
             Id= Guid.NewGuid(),
            PersonId= Guid.NewGuid(),
               PolicyId= Guid.NewGuid(),
-
-            Active = true
+            Active = true,
+            ValidFrom= DateTime.Now,
+            ValidTo= DateTime.Now.AddYears(1),
+            Amount= 1000m,
+            PolicyType= PolicyType.Health
         },
         new()
         {
             Id= Guid.NewGuid(),
             PersonId= Guid.NewGuid(),
             PolicyId= Guid.NewGuid(),
-            Active = true
+            Active = true,
+            ValidFrom= DateTime.Now,
+            ValidTo= DateTime.Now.AddYears(2),
+            Amount= 2000m,
+            PolicyType= PolicyType.Life
         }
     ];
 
