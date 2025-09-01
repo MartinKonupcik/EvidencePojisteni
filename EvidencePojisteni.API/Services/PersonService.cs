@@ -14,7 +14,7 @@ public class PersonService
             LastName = "Novák",
             Phone = "123456789",
             Age = 30,
-            ContractId = [Guid.NewGuid()],
+            Contracts = new List<Guid> { Guid.NewGuid() },
         },
         new()
         {
@@ -23,11 +23,10 @@ public class PersonService
             LastName = "Svoboda",
             Phone = "987654321",
             Age = 45,
-            ContractId = [Guid.NewGuid()],
+            Contracts = new List<Guid> { Guid.NewGuid() },
         }
 ];
-        
-    public async Task<DetailPersonDto?> Get(Guid personId)
+        public async Task<DetailPersonDto?> Get(Guid personId)
     {
         // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);

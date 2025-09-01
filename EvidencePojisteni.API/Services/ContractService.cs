@@ -10,8 +10,8 @@ public class ContractService
         new()
         {
             Id= Guid.NewGuid(),
-           PersonId= Guid.NewGuid(),
-              PolicyId= Guid.NewGuid(),
+            PersonId= Guid.NewGuid(),
+            PolicyId= Guid.NewGuid(),
             Active = true,
             ValidFrom= DateTime.Now,
             ValidTo= DateTime.Now.AddYears(1),

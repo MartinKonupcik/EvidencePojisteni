@@ -7,4 +7,5 @@ public class DetailPersonDto
     public string LastName { get; set; } = null!;
     public string Phone { get; set; } = null!;
     public int Age { get; set; }
+    public List<Guid> Contracts { get; set; }
 }
