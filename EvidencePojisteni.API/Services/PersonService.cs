@@ -14,7 +14,8 @@ public class PersonService
             LastName = "Novák",
             Phone = "123456789",
             Age = 30,
-            Contracts = new List<Guid> { Guid.NewGuid() },
+            Contracts = [Guid.NewGuid()],
+            PolicyId = Guid.NewGuid()
         },
         new()
         {
@@ -23,7 +24,8 @@ public class PersonService
             LastName = "Svoboda",
             Phone = "987654321",
             Age = 45,
-            Contracts = new List<Guid> { Guid.NewGuid() },
+            Contracts = [Guid.NewGuid()],
+            PolicyId = Guid.NewGuid()
         }
 ];
         public async Task<DetailPersonDto?> Get(Guid personId)
@@ -39,7 +41,7 @@ public class PersonService
         // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
 
-        return _personList.Select(p => p.GetListItem()).ToArray();
+        return [.. _personList.Select(p => p.GetListItem())];
     }
 
     public async Task Create(DetailPersonDto person)
