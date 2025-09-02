@@ -15,8 +15,8 @@ public class PersonService
             Phone = "123456789",
             Age = 30,
             Contracts = [Guid.NewGuid()],
-            PolicyId = Guid.NewGuid()
         },
+
         new()
         {
             Id = Guid.NewGuid(),
@@ -25,14 +25,12 @@ public class PersonService
             Phone = "987654321",
             Age = 45,
             Contracts = [Guid.NewGuid()],
-            PolicyId = Guid.NewGuid()
         }
 ];
         public async Task<DetailPersonDto?> Get(Guid personId)
     {
         // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
-
         return _personList.SingleOrDefault(p => p.Id == personId)?.GetDetail();
     }
 
@@ -40,7 +38,6 @@ public class PersonService
     {
         // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
-
         return [.. _personList.Select(p => p.GetListItem())];
     }
 

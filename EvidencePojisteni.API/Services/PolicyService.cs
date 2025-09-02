@@ -13,7 +13,7 @@ public class PolicyService
                 Id = Guid.NewGuid(),
                 Type = PolicyType.Health,
                 Name = "Health care",
-                ContractId = Guid.NewGuid(),
+                Contracts = [Guid.NewGuid()],
                 MaxAmountOfInsuredItems = 5,
                 ValidFrom = DateOnly.FromDateTime(DateTime.Now),
                 ValidTo = DateOnly.FromDateTime(DateTime.Now.AddYears(1))
@@ -23,7 +23,7 @@ public class PolicyService
                 Id = Guid.NewGuid(),
                 Type = PolicyType.Life,
                 Name = "Life insurance",
-                ContractId = Guid.NewGuid(),
+                Contracts = [Guid.NewGuid()],
                 MaxAmountOfInsuredItems = 3,
                 ValidFrom = DateOnly.FromDateTime(DateTime.Now),
                 ValidTo = DateOnly.FromDateTime(DateTime.Now.AddYears(1))

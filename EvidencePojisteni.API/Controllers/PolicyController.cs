@@ -36,7 +36,6 @@ public class PolicyController(PolicyService service) : ControllerBase
     {
         await service.Create(policyDto);
         return CreatedAtAction(nameof(Get), new { Id = policyDto.PolicyId }, null);
-
     }
 
     /// <summary>
