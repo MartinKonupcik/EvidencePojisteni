@@ -45,8 +45,8 @@ public class PolicyService
     }
 
     public async Task Create(DetailPolicyDto policyDto)
-    {     
-        _policyList.Add(new Policy(Guid.NewGuid(),policyDto));
+    {
+        _policyList.Add(new Policy(Guid.NewGuid(), policyDto));
         await Task.Delay(50).ConfigureAwait(false);
     }
 

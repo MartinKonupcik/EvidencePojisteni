@@ -5,7 +5,7 @@ namespace EvidencePojisteni.API.Services;
 
 public class PersonService
 {
-    private List<Person> _personList =
+    private  List<Person> _personList =
     [
         new()
         {

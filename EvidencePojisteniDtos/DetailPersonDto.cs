@@ -2,7 +2,6 @@
 
 public class DetailPersonDto
 {
-    public Guid PolicyId { get; set; }
     public Guid PersonId { get; set; }
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;

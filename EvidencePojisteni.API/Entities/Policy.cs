@@ -32,13 +32,13 @@ public class Policy : Entity
     }
     public ListItemPolicyDto GetListItem() => new()
     {
+        PolicyId = Id,
         Contracts = Contracts,
         Type = Type,
         Name = Name,
         ValidFrom = ValidFrom,
         ValidTo = ValidTo,
         MaxAmountOfInsuredItems = MaxAmountOfInsuredItems,
-        PolicyId = Id
     };
 
     public DetailPolicyDto GetDetail() => new()

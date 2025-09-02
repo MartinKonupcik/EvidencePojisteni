@@ -12,10 +12,10 @@ public class PolicyController(PolicyService service) : ControllerBase
     /// Gets a specific policy record by its ID.
     /// </summary>
     [HttpGet("{PolicyId:Guid}")]
-    public async Task<ActionResult<ListItemPolicyDto>> Get([FromRoute] Guid PolicyId)
+    public async Task<ActionResult<DetailPolicyDto>> Get([FromRoute] Guid PolicyId)
     {
         var dto = await service.Get(PolicyId);
-        return dto is null ? (ActionResult<ListItemPolicyDto>)NotFound() : (ActionResult<ListItemPolicyDto>)Ok(dto);
+        return dto is null ? (ActionResult<DetailPolicyDto>)NotFound() : (ActionResult<DetailPolicyDto>)Ok(dto);
     }
 
     /// <summary>
