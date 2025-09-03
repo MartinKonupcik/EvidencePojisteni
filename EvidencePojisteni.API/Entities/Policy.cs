@@ -29,6 +29,7 @@ public class Policy : Entity
         ValidFrom = dto.ValidFrom;
         ValidTo = dto.ValidTo;
         MaxAmountOfInsuredItems = dto.MaxAmountOfInsuredItems;
+        Contracts = dto.Contracts;
     }
     public ListItemPolicyDto GetListItem() => new()
     {
@@ -49,6 +50,7 @@ public class Policy : Entity
         ValidFrom = ValidFrom,
         ValidTo = ValidTo,
         MaxAmountOfInsuredItems = MaxAmountOfInsuredItems,
+        Contracts = Contracts
     };
 }
 
