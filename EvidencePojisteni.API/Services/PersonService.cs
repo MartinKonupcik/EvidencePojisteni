@@ -1,67 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EvidencePojisteni.API.Entities;
+using EvidencePojisteniDtos;
 
-namespace EvidencePojisteni.API.Services
+namespace EvidencePojisteni.API.Services;
+
+public class PersonService
 {
-    public class PersonService
+    private  List<Person> _personList =
+    [
+        new()
+        {
+            Id = Guid.NewGuid(),
+            FirstName = "Jan",
+            LastName = "Novák",
+            Phone = "123456789",
+            Age = 30,
+            Contracts = [Guid.NewGuid()],
+        },
+
+        new()
+        {
+            Id = Guid.NewGuid(),
+            FirstName = "Petr",
+            LastName = "Svoboda",
+            Phone = "987654321",
+            Age = 45,
+            Contracts = [Guid.NewGuid()],
+        }
+];
+        public async Task<DetailPersonDto?> Get(Guid personId)
     {
-        private List<Person> _person = new()
+        // Simulate async operation
+        await Task.Delay(100).ConfigureAwait(false);
+        return _personList.SingleOrDefault(p => p.Id == personId)?.GetDetail();
+    }
+
+    public async Task<ListItemPersonDto[]> GetList()
+    {
+        // Simulate async operation
+        await Task.Delay(100).ConfigureAwait(false);
+        return [.. _personList.Select(p => p.GetListItem())];
+    }
+
+    public async Task Create(DetailPersonDto person)
+    {
+        _personList.Add(new Person(Guid.NewGuid(), person));
+        await Task.Delay(100).ConfigureAwait(false);
+    }
+
+    public async Task<string> Delete(Guid personId)
+    {
+        if (_personList.Any(c => c.Id == personId))
         {
-           
-        };
-
-      public async Task<Person?> Get(Guid personId)
-        {
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-
-            return _person.SingleOrDefault(p => p.PersonId == personId);
-        }
-
-        public async Task<Person[]> GetList()
-        {
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-
-            return [.. _person];
-        }
-
-        public async Task Create(Person person)
-        {
-            // Assign a new Guid if not already set
-            if (person.PersonId == Guid.Empty)
-            {
-                person.PersonId = Guid.NewGuid();
-            }
-
-            _person.Add(person);
-
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-        }
-
-        public string Delete(Guid personId)
-        {
-            var toDelete = _person.Where(x => x.PersonId == personId);
-            if (toDelete.Count() == 0)
-            {
-                return "NotFound";
-            }
-            _ = _person.Remove(toDelete.Single());
+            _ = _personList.RemoveAll(c => c.Id == personId);
             return "Deleted";
         }
-        public async Task<ActionResult> Update(Guid personId, Person person)
-        {
-            var existingPerson = await Get(personId);
-            if (existingPerson is null)
-            {
-                return new NotFoundResult();
-            }
-            existingPerson.FirstName = person.FirstName;
-            existingPerson.LastName = person.LastName;
-            existingPerson.Age = person.Age;
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-            return new OkResult();
-        }
+        return "Not Found";
+    }
+    public async Task<bool> Update(Guid personId, DetailPersonDto personDto)
+    {
+        _personList.FirstOrDefault(c => c.Id == personId)?.Update(personDto);
+        await Task.Delay(100).ConfigureAwait(false);
+        return true;
     }
 }

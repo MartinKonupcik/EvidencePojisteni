@@ -1,14 +1,38 @@
-﻿@model EvidencePojisteni.Policy
+﻿@model EvidencePojisteniDto.ListItemPolicyDto[]
 
 @{
-    ViewData["Title"] = "Policy";
+    ViewData["Title"] = "Policy List";
 }
-<form method="post">
-    <div class="form-group">
-        <label for="InsuranceType">Insurance Type</label>
-        <select asp-for="InsuranceType" asp-items="@(new SelectList(Model.InsuranceType))" class="form-control">
-            <option value="">-- Select --</option>
-        </select>
+
+<div class="container">
+    <h1>Policies</h1>
+    <div>
+        <a class="btn btn-blue" asp-action="NewPolicy" asp-controller="Home">New Policy</a>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var policy in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="PolicyDetail" asp-route-id="@policy.PolicyId">
+                            @policy.Name
+                        </a>
+                    </td>
+                    <td>@policy.Type</td>
+                    <td>
+                        <a class="btn btn-yellow" asp-action="EditPolicy" asp-route-id="@policy.PolicyId">Edit</a>
+                        <a class="btn btn-red" asp-action="DeletePolicy" asp-route-id="@policy.PolicyId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

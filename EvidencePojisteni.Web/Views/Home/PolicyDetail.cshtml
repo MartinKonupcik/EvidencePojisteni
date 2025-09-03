@@ -6,8 +6,12 @@
 <div class="container">
     <h1>Insurance Details</h1>
     <div>
-        <span class="label">Insurance Type</span>
-        <span class="value">@Model.Policy.InsuranceType</span>
+        <span class="label">Policy Type</span>
+        <span class="value">@Model.Policy.Type</span>
+    </div>
+    <div>
+        <span class="label">Policy Name</span>
+        <span class="value">@Model.Policy.Name</span>
     </div>
     <div>
         <span class="label">Insured Person</span>
@@ -15,11 +19,11 @@
     </div>
     <div>
         <span class="label">Valid From</span>
-        <span class="value">@Model.Contract.ValidFrom</span>
+        <span class="value">@Model.Contract.ValidFrom.ToShortDateString()</span>
     </div>
     <div class="info-row">
         <span class="label">Valid To</span>
-        <span class="value">@Model.Contract.ValidTo</span>
+        <span class="value">@Model.Contract.ValidTo.ToShortDateString()</span>
     </div>
     <div>
         <span class="label">Insured Amount</span>
@@ -27,7 +31,7 @@
     </div>
     <div>
         <span class="label">Status</span>
-        <span class="value">@Model.Contract.Active</span>
+        <span class="value">@(Model.Contract.Active ? "Active" : "Inactive")</span>+
     </div>
     <div class="actions">
         <button class="secondary" type="button">Back</button>

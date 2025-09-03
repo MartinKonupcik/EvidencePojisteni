@@ -1,89 +1,60 @@
 ﻿using EvidencePojisteni.API.Services;
+using EvidencePojisteniDtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EvidencePojisteni.API.Controllers
+namespace EvidencePojisteni.API.Controllers;
+
+[Route("Policy")]
+[ApiController]
+public class PolicyController(PolicyService service) : ControllerBase
 {
-    [Route("Policy")]
-    [ApiController]
-    public class PolicyController(PolicyService service) : ControllerBase
+    /// <summary>
+    /// Gets a specific policy record by its ID.
+    /// </summary>
+    [HttpGet("{PolicyId:Guid}")]
+    public async Task<ActionResult<DetailPolicyDto>> Get([FromRoute] Guid PolicyId)
     {
-        /// <summary>
-        /// Gets a specific policy record by its ID.
-        /// </summary>
-        /// <param name="PolicyId">The ID of the policy record.</param>
-        /// <returns>
-        /// The policy record if found; otherwise, a 404 Not Found response.
-        /// </returns>
-        [HttpGet("{PolicyId:Guid}")]
-        public async Task<ActionResult<Policy>> Get([FromRoute] Guid PolicyId)
-        {
-            var policy = await service.Get(PolicyId);
+        var dto = await service.Get(PolicyId);
+        return dto is null ? (ActionResult<DetailPolicyDto>)NotFound() : (ActionResult<DetailPolicyDto>)Ok(dto);
+    }
 
-            return policy is null ? NotFound() : Ok(policy);
-        }
+    /// <summary>
+    /// Gets a list of all policy records.
+    /// </summary>
+    [HttpGet]
+    public async Task<ActionResult<ListItemPolicyDto[]>> GetList()
+    {
+        var dtos = await service.GetListItems();
+        return Ok(dtos);
+    }
 
-        /// <summary>
-        /// Gets a list of all policy records.
-        /// </summary>
-        /// <returns>
-        /// An array of all policy records.
-        /// </returns>
-        [HttpGet]
-        public async Task<ActionResult<Policy[]>> GetList()
-        {
-            var allPolicies = await service.GetList();
-            return Ok(allPolicies);
-        }
+    /// <summary>
+    /// Creates a new policy record.
+    /// </summary>
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] DetailPolicyDto policyDto)
+    {
+        await service.Create(policyDto);
+        return CreatedAtAction(nameof(Get), new { Id = policyDto.PolicyId }, null);
+    }
 
-        /// <summary>
-        /// Creates a new policy record.
-        /// </summary>
-        /// <param name="policy">The policy object to create.</param>
-        [HttpPost]
-        public async Task New([FromBody] Policy policy)
-        {
-            await service.Create(policy);
-        }
+    /// <summary>
+    /// Deletes a policy record by its ID.
+    /// </summary>
+    [HttpDelete("{PolicyId:Guid}")]
+    public async Task<ActionResult> Delete([FromRoute] Guid PolicyId)
+    {
+        var deleted = await service.Delete(PolicyId);
+        return deleted ? Ok() : NotFound();
+    }
 
-        /// <summary>
-        /// Deletes a policy record by its ID.
-        /// </summary>
-        /// <param name="PolicyId">The ID of the policy to delete.</param>
-        /// <returns>
-        /// 200 OK if deleted; otherwise, 404 Not Found.
-        /// </returns>
-        [HttpDelete("{PolicyId:Guid}")]
-        public async Task<ActionResult> Delete([FromRoute] Guid PolicyId)
-        {
-            var result = await service.Delete(PolicyId);
-
-            if (result == "Deleted")
-            {
-                return Ok();
-            }
-            return NotFound();
-        }
-        /// <summary>
-        ///  Updates an existing policy record.
-        /// </summary>
-        /// <param name="PolicyId">The ID of the policy to update.</param>
-        /// <param name="policy">The updated policy object.</param>
-        /// <returns>
-        /// 204 No Content if updated; otherwise, 404 Not Found.
-        /// </returns>
-        [HttpPut("{PolicyId:Guid}")]
-        public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] Policy policy)
-        {
-            if (PolicyId != policy.Id)
-            {
-                return BadRequest("Policy ID mismatch.");
-            }
-            var updated = await service.Update(PolicyId, policy);
-            if (!updated)
-            {
-                return NotFound();
-            }
-            return NoContent();
-        }
+    /// <summary>
+    /// Updates an existing policy record.
+    /// </summary>
+    [HttpPut("{PolicyId:Guid}")]
+    public async Task<ActionResult> Update([FromRoute] Guid PolicyId, [FromBody] DetailPolicyDto policyDto)
+    {
+        var updated = await service.Update(PolicyId, policyDto);
+        return !updated ? NotFound() : NoContent();
     }
 }

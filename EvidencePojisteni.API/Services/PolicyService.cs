@@ -1,70 +1,69 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics.Contracts;
+﻿using EvidencePojisteni.API.Entities;
+using EvidencePojisteniDtos;
+using System;
 
-namespace EvidencePojisteni.API.Services
+namespace EvidencePojisteni.API.Services;
+
+public class PolicyService
 {
-    public class PolicyService
+    private readonly List<Policy> _policyList =
+        [
+            new()
+            {
+                Id = Guid.NewGuid(),
+                Type = PolicyType.Health,
+                Name = "Health care",
+                Contracts = [Guid.NewGuid()],
+                MaxAmountOfInsuredItems = 5,
+                ValidFrom = DateOnly.FromDateTime(DateTime.Now),
+                ValidTo = DateOnly.FromDateTime(DateTime.Now.AddYears(1))
+            },
+            new()
+            {
+                Id = Guid.NewGuid(),
+                Type = PolicyType.Life,
+                Name = "Life insurance",
+                Contracts = [Guid.NewGuid()],
+                MaxAmountOfInsuredItems = 3,
+                ValidFrom = DateOnly.FromDateTime(DateTime.Now),
+                ValidTo = DateOnly.FromDateTime(DateTime.Now.AddYears(1))
+            }
+        ];
+ 
+    public async Task<DetailPolicyDto?> Get(Guid policyId)
     {
-        private List<Policy> _policy = new()
+        await Task.Delay(100).ConfigureAwait(false);
+
+        return _policyList.FirstOrDefault(p => p.Id == policyId)?.GetDetail();
+    }
+
+    public async Task<ListItemPolicyDto[]> GetListItems()
+    {
+        await Task.Delay(100).ConfigureAwait(false);
+
+        return [.. _policyList.Select(p => p.GetListItem())];
+    }
+
+    public async Task Create(DetailPolicyDto policyDto)
+    {
+        _policyList.Add(new Policy(Guid.NewGuid(), policyDto));
+        await Task.Delay(50).ConfigureAwait(false);
+    }
+
+    public async Task<bool> Delete(Guid id)
+    {
+        if (_policyList.Any(c => c.Id == id))
         {
-            
-        };
-
-        public async Task<Policy?> Get(Guid policyId)
-        {
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-
-            return _policy.SingleOrDefault(p => p.Id == policyId);
-        }
-
-        public async Task<Policy[]> GetList()
-        {
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-
-            return [.. _policy];
-        }
-
-        public async Task Create(Policy policy)
-        {
-            // Assign a new Guid if not already set
-            if (policy.Id == Guid.Empty)
-            {
-                policy.Id = Guid.NewGuid();
-            }
-
-            _policy.Add(policy);
-
-            // Simulate async operation
-            await Task.Delay(100).ConfigureAwait(false);
-        }
-
-        public async Task<string> Delete(Guid id)
-        {
-            var toDelete = _policy.Where(x => x.Id == id);
-            if (toDelete.Count() == 0)
-            {
-                return "NotFound";
-            }
-
-            _ = _policy.Remove(toDelete.Single());
-            return "Deleted";
-        }
-        public async Task<bool> Update(Guid policyId, Policy policy)
-        {
-            var existing = _policy.SingleOrDefault(x => x.Id == policyId);
-            if (existing == null)
-            {
-                return false;
-            }
-
-            existing.Name = policy.Name;
-            
-            // ... other properties
-
-            await Task.Delay(100).ConfigureAwait(false);
+           _policyList.RemoveAll(c => c.Id == id);
             return true;
         }
+        return false;
+    }
+
+    public async Task<bool> Update(Guid policyId, DetailPolicyDto policyDto)
+    {
+        _policyList.FirstOrDefault(c => c.Id == policyId)?.Update(policyDto);
+        await Task.Delay(100).ConfigureAwait(false);
+        return true;
     }
 }

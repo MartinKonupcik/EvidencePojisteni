@@ -1,4 +1,4 @@
-﻿@model EvidencePojisteni.Person[]
+﻿@model EvidencePojisteniDto.ListItemPersonDto[]
 <div class="container">
     <h1>Persons</h1>
     <div>
@@ -9,7 +9,7 @@
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Phone</th>
+                <th>Policy Type</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,15 +18,15 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="DetailPerson" asp-route-id="@person.PersonId">
+                        <a asp-action="DetailPerson" asp-route-id="@person.ContractId">
                             @person.FirstName
                         </a>
                     </td>
                     <td>@person.LastName</td>
-                    <td>@person.Phone</td>
+                    <td>@person.PolicyType</td>
                     <td>
-                        <a class="btn btn-yellow" asp-action="EditPerson" asp-route-id="@person.PersonId">Edit</a>
-                        <a class="btn btn-red" asp-action="DeletePerson" asp-route-id="@person.PersonId">Delete</a>
+                        <a class="btn btn-yellow" asp-action="EditPerson" asp-route-id="@person.ContractId">Edit</a>
+                        <a class="btn btn-red" asp-action="DeletePerson" asp-route-id="@person.ContractId">Delete</a>
                     </td>
                 </tr>
             }

@@ -3,6 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddSingleton<EvidencePojisteni.API.Services.ContractService>();
+builder.Services.AddSingleton<EvidencePojisteni.API.Services.PolicyService>();
+builder.Services.AddSingleton<EvidencePojisteni.API.Services.PersonService>();
 
 // Add Swagger/OpenAPI services
 builder.Services.AddEndpointsApiExplorer();
@@ -16,7 +18,7 @@ if (app.Environment.IsDevelopment())
     // Enable middleware to serve generated Swagger as a JSON endpoint.
     app.UseSwagger();
     // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-    // specifying the Swagger JSON endpoint.
+    // specifying the Swagger JSON endpoint. 
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API v1");

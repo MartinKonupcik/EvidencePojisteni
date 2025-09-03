@@ -9,6 +9,9 @@
         <div class="col">
             @Model.Person.Phone
         </div>
+        <div class="col">
+            @Model.Person.Age
+        </div>
     </div>
 </div>
 
@@ -18,33 +21,33 @@
         <thead>
             <tr>
                 <th>Type</th>
+                <th>Name</th>
                 <th>Amount</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            
-                <tr>
-                    <td>
-                        <a asp-controller="Home" asp-action="DetailInsurance" asp-route-id="@Model.Policy.Id">
-                            @Model.Policy.InsuranceType
-                        </a>
-                    </td>
-                    <td>@Model.Contract.Amount</td>
-                    <td>
-                        <div>
-                            <a class="btn btn-red" asp-controller="Home" asp-action="DeleteInsurance" asp-route-id="@Model.Policy.Id">Delete</a>
-                            <a class="btn btn-yellow" asp-controller="Home" asp-action="EditInsurance" asp-route-id="@Model.Policy.Id">Edit</a>
-                        </div>
-                    </td>
-                </tr>
-            
+            <tr>
+                <td>
+                    <a asp-controller="Home" asp-action="DetailInsurance" asp-route-id="@Model.Policy.Id">
+                        @Model.Policy.Type
+                    </a>
+                </td>
+                <td>@Model.Policy.Name</td>
+                <td>@Model.Contract.Amount</td>
+                <td>
+                    <div>
+                        <a class="btn btn-red" asp-controller="Home" asp-action="DeleteInsurance" asp-route-id="@Model.Policy.Id">Delete</a>
+                        <a class="btn btn-yellow" asp-controller="Home" asp-action="EditInsurance" asp-route-id="@Model.Policy.Id">Edit</a>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 
     <div class="action-bar">
-        <a class="btn btn-blue" asp-controller="Home" asp-action="AddInsurance" asp-route-personId="@Model.Person.PersonId">Add Insurance</a>
-        <a class="btn btn-yellow" asp-controller="Home" asp-action="EditPerson" asp-route-id="@Model.Person.PersonId">Edit Person</a>
-        <a class="btn btn-red" asp-controller="Home" asp-action="DeletePerson" asp-route-id="@Model.Person.PersonId">Delete Person</a>
+        <a class="btn btn-blue" asp-controller="Home" asp-action="AddInsurance" asp-route-personId="@Model.Person.Id">Add Insurance</a>
+        <a class="btn btn-yellow" asp-controller="Home" asp-action="EditPerson" asp-route-id="@Model.Person.Id">Edit Person</a>
+        <a class="btn btn-red" asp-controller="Home" asp-action="DeletePerson" asp-route-id="@Model.Person.Id">Delete Person</a>
     </div>
 </div>

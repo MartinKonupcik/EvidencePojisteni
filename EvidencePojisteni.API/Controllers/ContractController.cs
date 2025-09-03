@@ -1,7 +1,9 @@
 ﻿using EvidencePojisteni.API.Services;
+using EvidencePojisteniDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvidencePojisteni.API.Controllers;
+
 /// <summary>
 /// API controller for managing contract records.
 /// </summary>
@@ -17,11 +19,10 @@ public class ContractController(ContractService service) : ControllerBase
     /// The contract record if found; otherwise, a 404 Not Found response.
     /// </returns>
     [HttpGet("{ContractId:Guid}")]
-    public async Task<ActionResult<Contract>> Get([FromRoute] Guid ContractId)
+    public async Task<ActionResult<DetailContractDto>> Get([FromRoute] Guid ContractId)
     {
         var contract = await service.Get(ContractId);
-
-        return contract is null ? NotFound() : Ok(contract);
+        return contract is null ? (ActionResult<DetailContractDto>)NotFound() : (ActionResult<DetailContractDto>)Ok(contract);
     }
 
     /// <summary>
@@ -31,11 +32,12 @@ public class ContractController(ContractService service) : ControllerBase
     /// An array of all contract records.
     /// </returns>
     [HttpGet]
-    public async Task<ActionResult<Contract[]>> GetList()
+    public async Task<ActionResult<ListItemContractDto[]>> GetList()
     {
         var allContracts = await service.GetList();
         return Ok(allContracts);
     }
+
     /// <summary>
     /// Creates a new contract record.
     /// </summary>
@@ -44,10 +46,16 @@ public class ContractController(ContractService service) : ControllerBase
     /// 201 Created if successful; otherwise, 400 Bad Request.
     /// </returns>
     [HttpPost]
-    public async Task New([FromBody] Contract contract)
+    public async Task<IActionResult> Create ([FromBody] DetailContractDto contractDto)
     {
-        await service.Create(contract);
+        if (contractDto is null)
+        {
+            return BadRequest("Contract data is required.");
+        }
+        await service.Create(contractDto);
+        return StatusCode(201);
     }
+
     /// <summary>
     /// Deletes a contract record by its ID.
     /// </summary>
@@ -56,31 +64,24 @@ public class ContractController(ContractService service) : ControllerBase
     /// 200 OK if deleted; otherwise, 404 Not Found.
     /// </returns>
     [HttpDelete("{ContractId:Guid}")]
-    public async Task<ActionResult> Delete([FromRoute] Guid contractId)
+    public async Task<ActionResult> Delete([FromRoute] Guid ContractId)
     {
-        var result = await service.Delete(contractId);
-
-        if (result == "Deleted")
-        {
-            return Ok();
-        }
-
-        return NotFound();
+        var result = await service.Delete(ContractId);
+        return result == "Deleted" ? Ok() : NotFound();
     }
+
     /// <summary>
+    /// Updates a contract record by its ID.
+    /// </summary>
+    /// <param name="contractId">The ID of the contract to update.</param>
+    /// <param name="UpdateContractDto">The updated contract object.</param>
+    /// <returns>
+    /// 204 No Content if successful; otherwise, 400 Bad Request or 404 Not Found.
+    /// </returns>
     [HttpPut("{ContractId:Guid}")]
-    public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] Contract contract)
+    public async Task<ActionResult> Update([FromRoute] Guid ContractId, [FromBody] DetailContractDto contractDto)
     {
-        if (ContractId != contract.ContractId)
-        {
-            return BadRequest("Contract ID mismatch.");
-        }
-        var existingContract = await service.Get(ContractId);
-        if (existingContract is null)
-        {
-            return NotFound();
-        }
-        await service.Update(contract);
-        return NoContent();
+        var updated = await service.Update(ContractId, contractDto);
+        return !updated ? NotFound() : NoContent();
     }
 }

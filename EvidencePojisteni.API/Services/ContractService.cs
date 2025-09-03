@@ -1,88 +1,68 @@
-﻿namespace EvidencePojisteni.API.Services;
+﻿
+using EvidencePojisteni.API.Entities;
+using EvidencePojisteniDtos;
 
+namespace EvidencePojisteni.API.Services;
 public class ContractService
 {
-    private List<Contract> _contract =
+    private List<Contract> _contractList =
     [
         new()
         {
-            ContractId = Guid.NewGuid(),
+            Id=Guid.NewGuid(),
             PersonId = Guid.NewGuid(),
             PolicyId = Guid.NewGuid(),
-            ValidFrom = DateTime.Now.AddYears(-1),
-            ValidTo = DateTime.Now.AddYears(5),
-            Amount = 1000000,
-            Active = true
+            Active = true,
+            ValidFrom = DateTime.Now,
+            ValidTo = DateTime.Now.AddYears(1),
+            Amount = 1000m,
+            PolicyType = PolicyType.Health
         },
+
         new()
         {
-            ContractId = Guid.NewGuid(),
+            Id = Guid.NewGuid(),
             PersonId = Guid.NewGuid(),
             PolicyId = Guid.NewGuid(),
-            ValidFrom = DateTime.Now.AddYears(-1),
-            ValidTo = DateTime.Now.AddYears(7),
-            Amount = 500000,
-            Active = true
+            Active = true,
+            ValidFrom = DateTime.Now,
+            ValidTo = DateTime.Now.AddYears(2),
+            Amount = 2000m,
+            PolicyType = PolicyType.Life
         }
     ];
 
-    public async Task<Contract?> Get(Guid id)
+    public async Task<DetailContractDto?> Get(Guid contractId)
     {
-        // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
-
-        return _contract.SingleOrDefault(p => p.ContractId == id);
+        return _contractList.FirstOrDefault(c => c.Id == contractId)?.GetDetail();
     }
 
-    public async Task<Contract[]> GetList()
+    public async Task<ListItemContractDto[]> GetList()
     {
-        // Simulate async operation
         await Task.Delay(100).ConfigureAwait(false);
-
-        return [.. _contract];
+        return _contractList.Select(static x => x.GetListItem()).ToArray();
     }
 
-    public async Task Create(Contract contract)
+    public async Task Create(DetailContractDto contractDto)
     {
-        // Assign a new Guid if not already set
-        if (contract.ContractId == Guid.Empty)
-        {
-            contract.ContractId = Guid.NewGuid();
-        }
-
-        _contract.Add(contract);
-
-        // Simulate async operation
+        _contractList.Add(new(Guid.NewGuid(), contractDto));
         await Task.Delay(100).ConfigureAwait(false);
     }
 
-    public async Task<string> Delete(Guid id)
+    public async Task<string> Delete(Guid contractId)
     {
-        var toDelete = _contract.Where(x => x.ContractId == id);
-        if (toDelete.Count() == 0)
+        if (_contractList.Any(c => c.Id == contractId))
         {
-            return "NotFound";
+            _ = _contractList.RemoveAll(c => c.Id == contractId);
+            return "Deleted";
         }
-
-        _ = _contract.Remove(toDelete.Single());
-        return "Deleted";
+        return "Not Found";
     }
 
-    public async Task<bool> Update(Contract contract)
+    public async Task<bool> Update(Guid contractId, DetailContractDto contractDto)
     {
-        var existing = _contract.SingleOrDefault(x => x.ContractId == contract.ContractId);
-        if (existing == null)
-        {
-            return false;
-        }
-
-        existing.PersonId = contract.PersonId;
-        existing.PolicyId = contract.PolicyId;
-        existing.ValidFrom = contract.ValidFrom;
-        existing.ValidTo = contract.ValidTo;
-        existing.Amount = contract.Amount;
-        existing.Active = contract.Active;
-
+        _contractList.FirstOrDefault(c => c.Id == contractId)?.Update(contractDto);
         await Task.Delay(100).ConfigureAwait(false);
         return true;
     }
